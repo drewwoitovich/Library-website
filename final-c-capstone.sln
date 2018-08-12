@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "final-c-capstone", "final-c-capstone\final-c-capstone.csproj", "{762B207A-7C20-48A5-9233-9766EC2849D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "final-c-capstone.Tests", "final-c-capstone.Tests\final-c-capstone.Tests.csproj", "{C8A504B6-E965-40C8-A90A-00D08246EDD8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{762B207A-7C20-48A5-9233-9766EC2849D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{762B207A-7C20-48A5-9233-9766EC2849D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{762B207A-7C20-48A5-9233-9766EC2849D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{762B207A-7C20-48A5-9233-9766EC2849D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8A504B6-E965-40C8-A90A-00D08246EDD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8A504B6-E965-40C8-A90A-00D08246EDD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8A504B6-E965-40C8-A90A-00D08246EDD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8A504B6-E965-40C8-A90A-00D08246EDD8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DDA3CFA8-E65E-4996-84F4-2AD1A1F6CBEB}
+	EndGlobalSection
+EndGlobal
