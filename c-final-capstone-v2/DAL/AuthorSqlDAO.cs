@@ -13,12 +13,14 @@ namespace c_final_capstone_v2.DAL
             "from book WHERE authors LIKE '%@searchValue%'";
 
         private string connectionString;
-
+        // Constructor
         public AuthorSqlDAO(string connectionString)
         {
             this.connectionString = connectionString;
         }
 
+        // Takes user input and searches the book table for any
+        // boot title that contains that user input
         public List<Book> SearchByAuthor(string searchValue)
         {
             List<Book> searchResults = new List<Book>();

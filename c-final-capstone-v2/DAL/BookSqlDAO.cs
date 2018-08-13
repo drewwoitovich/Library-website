@@ -18,12 +18,14 @@ namespace c_final_capstone_v2.DAL
         "@addDate)";
 
         private string connectionString;
-
+        // Constructor
         public BookSqlDAO(string connectionString)
         {
             this.connectionString = connectionString;
         }
 
+        // Gets passed a search value from user and searches for any
+        // titles that contain the given string
         public List<Book> SearchByTitle(string searchValue)
         {
             List<Book> searchResults = new List<Book>();
@@ -62,6 +64,8 @@ namespace c_final_capstone_v2.DAL
             return searchResults;
         }
 
+        // Takes a new book as an argument and adds that book to the
+        // book table in the connected database
         public bool AddBook(Book newBook)
         {
             bool wasAdded = false;

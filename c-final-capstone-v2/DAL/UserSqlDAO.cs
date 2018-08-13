@@ -15,12 +15,14 @@ namespace c_final_capstone_v2.DAL
         "@newsletter, @email)";
 
         private string connectionString;
-
+        // Constructor
         public UserSqlDAO(string connectionString)
         {
             this.connectionString = connectionString;
         }
 
+        // Takes in a new user as an argument and adds them to
+        // the users table in the connected database
         public bool CreateUser(User newUser)
         {
             try
