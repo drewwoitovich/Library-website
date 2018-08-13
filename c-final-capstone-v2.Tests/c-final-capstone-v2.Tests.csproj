@@ -6,12 +6,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{C8A504B6-E965-40C8-A90A-00D08246EDD8}</ProjectGuid>
+    <ProjectGuid>{65C93B31-81F5-4B37-AB4E-89A1E02D5877}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>final_c_capstone.Tests</RootNamespace>
-    <AssemblyName>final-c-capstone.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <RootNamespace>c_final_capstone_v2.Tests</RootNamespace>
+    <AssemblyName>c-final-capstone-v2.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <NuGetPackageImportStamp>
@@ -99,9 +99,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\final-c-capstone\final-c-capstone.csproj">
-      <Project>{762B207A-7C20-48A5-9233-9766EC2849D2}</Project>
-      <Name>final-c-capstone</Name>
+    <ProjectReference Include="..\c-final-capstone-v2\c-final-capstone-v2.csproj">
+      <Project>{EDAE738D-156D-402E-AABB-CC4AB2CB8ECB}</Project>
+      <Name>c-final-capstone-v2</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("final_c_capstone.Tests")]
+[assembly: AssemblyTitle("c_final_capstone_v2")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("final_c_capstone.Tests")]
+[assembly: AssemblyProduct("c_final_capstone_v2")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("8d9f8e2a-0512-40f6-8df9-0f4518b9fb9b")]
+[assembly: Guid("e1015c15-e34c-40ff-b26f-1a5866e4b3c1")]
 
 // Version information for an assembly consists of the following four values:
 //

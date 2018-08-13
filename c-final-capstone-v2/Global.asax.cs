@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
-namespace final_c_capstone
+namespace c_final_capstone_v2
 {
     public class MvcApplication : System.Web.HttpApplication
     {

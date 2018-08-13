@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using final_c_capstone;
-using final_c_capstone.Controllers;
+using c_final_capstone_v2;
+using c_final_capstone_v2.Controllers;
 
-namespace final_c_capstone.Tests.Controllers
+namespace c_final_capstone_v2.Tests.Controllers
 {
     [TestClass]
     public class HomeControllerTest
