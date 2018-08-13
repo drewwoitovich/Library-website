@@ -2,13 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using c_final_capstone_v2.Models;
+using System.Data.SqlClient;
 
 namespace c_final_capstone_v2.DAL
 {
-    public class BookSqlDAO
+    public class BookSqlDAO : IBookSqlDAO
     {
-        private static string sqlAuthorSearch = "SELECT title, authors, genre, shelf_number " +
+        private static string sqlTitleSearch = "SELECT title, authors, genre, shelf_number " +
         "from book WHERE title LIKE '%@searchValue%'";
+
+        private static string sqlAddBook = "INSERT INTO [dbo].[book] " +
+        "([authors], [title], [last_search], [is_admin], [newsletter] " +
+        ",[email]) VALUES (@username, @password, NULL, @isAdmin, " +
+        "@newsletter, @email)";
 
         private string connectionString;
 
@@ -17,7 +24,7 @@ namespace c_final_capstone_v2.DAL
             this.connectionString = connectionString;
         }
 
-        public List<Book> SearchByAuthor(string searchValue)
+        public List<Book> SearchByTitle(string searchValue)
         {
             List<Book> searchResults = new List<Book>();
 
@@ -27,7 +34,7 @@ namespace c_final_capstone_v2.DAL
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand(sqlAuthorSearch, conn);
+                    SqlCommand cmd = new SqlCommand(sqlTitleSearch, conn);
                     cmd.Parameters.AddWithValue("@searchValue", searchValue);
 
 
@@ -57,6 +64,32 @@ namespace c_final_capstone_v2.DAL
                 throw e;
             }
             return searchResults;
+        }
+
+        public bool AddBook(Book newBook)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sqlCreateUser, conn);
+                    cmd.Parameters.AddWithValue("@username", newUser.Username);
+                    cmd.Parameters.AddWithValue("@password", newUser.Password);
+                    cmd.Parameters.AddWithValue("@isAdmin", newUser.IsAdmin);
+                    cmd.Parameters.AddWithValue("@newsletter", newUser.Newsletter);
+                    cmd.Parameters.AddWithValue("@email", newUser.Email);
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }
