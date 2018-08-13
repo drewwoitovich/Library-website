@@ -23,12 +23,10 @@ CREATE TABLE book (
   CONSTRAINT pk_book_primary_key PRIMARY KEY (book_id),
   );
 
-
-
 CREATE TABLE author_book (
+  author_id integer NOT NULL,
   book_id integer identity NOT NULL,
-  author_id integer NOT NULL
-  CONSTRAINT pk_author_book_primary_key PRIMARY KEY (book_id)
+  CONSTRAINT pk_author_book_primary_key PRIMARY KEY (author_id, book_id)
 );
 
 CREATE TABLE reading_list (
