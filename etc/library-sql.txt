@@ -1,3 +1,9 @@
+DROP TABLE reading_list;
+DROP TABLE author_book;
+DROP TABLE book;
+DROP TABLE author;
+DROP TABLE [user];
+
 CREATE TABLE [user] (
   user_id integer identity NOT NULL,
   username varchar(32) NOT NULL,
@@ -20,13 +26,14 @@ CREATE TABLE book (
   book_id integer identity NOT NULL,
   title varchar(max) NOT NULL,
   genre varchar(max) NOT NULL,
+  shelf_number integer NOT NULL
   add_date datetime NOT NULL,
   CONSTRAINT pk_book_primary_key PRIMARY KEY (book_id),
   );
 
 CREATE TABLE author_book (
   author_id integer NOT NULL,
-  book_id integer identity NOT NULL,
+  book_id integer NOT NULL,
   CONSTRAINT pk_author_book_primary_key PRIMARY KEY (author_id, book_id),
   CONSTRAINT fk_author_foreign_key FOREIGN KEY (author_id) REFERENCES author(author_id),
   CONSTRAINT fk_book_foreign_key FOREIGN KEY (book_id) REFERENCES book(book_id)
