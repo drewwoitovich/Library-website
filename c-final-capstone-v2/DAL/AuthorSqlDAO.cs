@@ -39,11 +39,7 @@ namespace c_final_capstone_v2.DAL
                     {
                         Book book = new Book();
 
-                        Author a = new Author();
-                        a.FirstName = Convert.ToString(reader["first_name"]);
-                        a.LastName = Convert.ToString(reader["last_name"]);
-
-                        book.Author = a.FirstName + " " + a.LastName;
+                        book.Author = Convert.ToString(reader["authors"]);
                         book.AddDate = Convert.ToDateTime(reader["add_date"]);
                         book.BookId = Convert.ToInt32(reader["book_id"]);
                         book.Genre = Convert.ToString(reader["genre"]);
