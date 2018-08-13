@@ -13,9 +13,9 @@ namespace c_final_capstone_v2.DAL
         "from book WHERE title LIKE '%@searchValue%'";
 
         private static string sqlAddBook = "INSERT INTO [dbo].[book] " +
-        "([authors], [title], [genre], [shelf_number], [add_date] " +
-        ",[email]) VALUES (@username, @password, NULL, @isAdmin, " +
-        "@newsletter, @email)";
+        "([authors], [title], [genre], [shelf_number], [add_date]" +
+        ") VALUES (@authors, @title, @genre, @shelfNumber, " +
+        "@addDate)";
 
         private string connectionString;
 
@@ -68,28 +68,33 @@ namespace c_final_capstone_v2.DAL
 
         public bool AddBook(Book newBook)
         {
+            bool wasAdded = false;
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand(sqlCreateUser, conn);
-                    cmd.Parameters.AddWithValue("@username", newUser.Username);
-                    cmd.Parameters.AddWithValue("@password", newUser.Password);
-                    cmd.Parameters.AddWithValue("@isAdmin", newUser.IsAdmin);
-                    cmd.Parameters.AddWithValue("@newsletter", newUser.Newsletter);
-                    cmd.Parameters.AddWithValue("@email", newUser.Email);
+                    SqlCommand cmd = new SqlCommand(sqlAddBook, conn);
+                    cmd.Parameters.AddWithValue("@authors", newBook.Author);
+                    cmd.Parameters.AddWithValue("@title", newBook.Title);
+                    cmd.Parameters.AddWithValue("@genre", newBook.Genre);
+                    cmd.Parameters.AddWithValue("@shelfNumber", newBook.ShelfNumber);
+                    cmd.Parameters.AddWithValue("@addDate", DateTime.Now);
 
-                    int rowsAffected = cmd.ExecuteNonQuery();
-
-                    return true;
+                    int count = cmd.ExecuteNonQuery();
+                    if (count > 0)
+                    {
+                        wasAdded = true;
+                    }
+                    
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return false;
+                throw e;
             }
+            return wasAdded;
         }
     }
 }
