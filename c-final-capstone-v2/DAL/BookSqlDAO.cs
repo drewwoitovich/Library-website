@@ -13,7 +13,7 @@ namespace c_final_capstone_v2.DAL
         "from book WHERE title LIKE '%@searchValue%'";
 
         private static string sqlAddBook = "INSERT INTO [dbo].[book] " +
-        "([authors], [title], [last_search], [is_admin], [newsletter] " +
+        "([authors], [title], [genre], [shelf_number], [add_date] " +
         ",[email]) VALUES (@username, @password, NULL, @isAdmin, " +
         "@newsletter, @email)";
 
