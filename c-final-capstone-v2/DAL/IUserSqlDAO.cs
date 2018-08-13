@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace c_final_capstone_v2.DAL
 {
-    interface IUserSqlDAO
+    public interface IUserSqlDAO
     {
     }
 }
