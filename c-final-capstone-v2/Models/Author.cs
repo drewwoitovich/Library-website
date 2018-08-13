@@ -7,7 +7,9 @@ namespace c_final_capstone_v2.Models
 {
     public class Author
     {
-        public string Name { get; set; }
+        public int AuthorId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public List<Book> AuthorBooks { get; set; }
     }
 }

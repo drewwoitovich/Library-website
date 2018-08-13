@@ -11,5 +11,6 @@ namespace c_final_capstone_v2.Models
         public string Title { get; set; }
         public List<Author> Authors { get; set; }
         public string Genre { get; set; }
+        public DateTime AddDate { get; set; }
     }
 }
