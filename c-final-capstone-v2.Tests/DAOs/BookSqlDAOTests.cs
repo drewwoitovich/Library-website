@@ -8,31 +8,38 @@ using c_final_capstone_v2;
 using c_final_capstone_v2.DAL;
 using c_final_capstone_v2.Models;
 using System.Configuration;
+using System.Data.SqlClient;
+
 
 
 namespace c_final_capstone_v2.Tests.DAOs
 {
-    class BookSqlDAOTests
+    [TestClass]
+    public class BookSqlDAOTests
     {
         public string connectionString = @"Data Source=.\sqlexpress;Initial Catalog=library;Integrated Security=True";
-        [TestClass]
-        public class BookSqlDAOTests
+
+        
+        [TestInitialize]
+        public void Initializer()
         {
-
-
-            [TestMethod]
-            public void BookSqlDAOSearchByTitle()
-            {
-                // Arrange
-                BookSqlDAO testDAO = new BookSqlDAO(connectionString);
-
-                // Act
-                List<Book> testResults;
-                testResults = testDAO.SearchByTitle("Star Wars");
-
-                // Assert
-                Assert.AreEqual(testResults[1], "Star Wars");
-            }
+           
         }
+
+        [TestMethod]
+        public void BookSqlDAOSearchByTitle()
+        {
+            // Arrange
+            IBookSqlDAO testDAO = new BookSqlDAO(connectionString);
+
+            // Act
+            List<Book> testResults = new List<Book>();
+            testResults = testDAO.SearchByTitle("Star Wars");
+
+            // Assert
+            Assert.AreEqual(1, testResults.Count);
+            Assert.AreEqual("Star Wars", testResults[0].Title);
+        }
+
     }
 }
