@@ -58,6 +58,21 @@ namespace c_final_capstone_v2.Tests.DAOs
             Assert.AreEqual(3, testResults.Count);
             Assert.AreEqual("Star Wars", testResults[0].Title);
         }
+
+        [TestMethod]
+        public void BookSqlDAOSearchByAuthorTest()
+        {
+            // Arrange
+            BookSqlDAO testDAO = new BookSqlDAO(connectionString);
+
+            // Act
+            List<Book> testResults = new List<Book>();
+            testResults = testDAO.SearchByAuthor("John");
+
+            // Assert
+            Assert.AreEqual(1, testResults.Count);
+            Assert.AreEqual("John Fulton", testResults[0].Author);
+        }
     }
 }
 
