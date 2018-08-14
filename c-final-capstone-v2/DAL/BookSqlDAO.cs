@@ -9,8 +9,8 @@ namespace c_final_capstone_v2.DAL
 {
     public class BookSqlDAO : IBookSqlDAO
     {
-        private static string sqlTitleSearch = "SELECT title, authors, genre, shelf_number " +
-        "from book WHERE title LIKE '%@searchValue%'";
+        string sqlTitleSearch = "SELECT book_id, title, authors, genre, shelf_number, add_date " +
+               "from book WHERE title LIKE @searchValue";
 
         private static string sqlAuthorSearch = "SELECT title, authors, genre, shelf_number " +
             "from book WHERE authors LIKE '%@searchValue%'";
@@ -40,8 +40,7 @@ namespace c_final_capstone_v2.DAL
                     conn.Open();
 
                     SqlCommand cmd = new SqlCommand(sqlTitleSearch, conn);
-                    cmd.Parameters.AddWithValue("@searchValue", searchValue);
-
+                    cmd.Parameters.AddWithValue("@searchValue", $"%{searchValue}%");
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
