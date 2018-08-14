@@ -9,7 +9,7 @@ using c_final_capstone_v2.DAL;
 using c_final_capstone_v2.Models;
 using System.Configuration;
 using System.Data.SqlClient;
-
+using System.Transactions;
 
 
 namespace c_final_capstone_v2.Tests.DAOs
@@ -19,11 +19,10 @@ namespace c_final_capstone_v2.Tests.DAOs
     {
         public string connectionString = @"Data Source=.\sqlexpress;Initial Catalog=library;Integrated Security=True";
 
-        
         [TestInitialize]
         public void Initializer()
         {
-           
+
         }
 
         [TestMethod]
@@ -40,6 +39,5 @@ namespace c_final_capstone_v2.Tests.DAOs
             Assert.AreEqual(1, testResults.Count);
             Assert.AreEqual("Star Wars", testResults[0].Title);
         }
-
     }
 }
