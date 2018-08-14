@@ -49,6 +49,20 @@ namespace c_final_capstone_v2.Controllers
             return View("Search", results);
         }
 
+        // Get Form for adding a book
+        public ActionResult AddBook()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        public ActionResult AddBook(Book b)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("AddBook", b);
+            }
+            return RedirectToAction("Contact");
+        }
     }
 }
