@@ -25,7 +25,7 @@ namespace c_final_capstone_v2.DAL
         }
 
         // Gets passed a search value from user and searches for any
-        // titles that contain the given string
+        // titles that contain the given value
         public List<Book> SearchByTitle(string searchValue)
         {
             List<Book> searchResults = new List<Book>();

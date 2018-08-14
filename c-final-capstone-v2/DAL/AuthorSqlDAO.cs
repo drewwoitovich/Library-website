@@ -19,8 +19,8 @@ namespace c_final_capstone_v2.DAL
             this.connectionString = connectionString;
         }
 
-        // Takes user input and searches the book table for any
-        // boot title that contains that user input
+        // Searches the book table for any
+        // book title that contains that user input
         public List<Book> SearchByAuthor(string searchValue)
         {
             List<Book> searchResults = new List<Book>();
