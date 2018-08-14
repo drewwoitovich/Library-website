@@ -55,33 +55,8 @@ namespace c_final_capstone_v2.DAL
             }
         }
 
-        public DateTime GetDateOfLastSearch(User user)
-        {
-            
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    conn.Open();
-
-                    SqlCommand cmd = new SqlCommand(sqlGetDateOfLastSearch, conn);
-                    cmd.Parameters.AddWithValue("@UserId", user.UserId);
-
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    while (reader.Read())
-                    {
-                        user.LastSearch = Convert.ToDateTime(reader["last_search"]);
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-            return user.LastSearch;
-        }
-
+        // Takes in a user and updates their last_search field
+        // in the database to the current date and time
         public bool UpdateUsersLastSearch(User user)
         {
             bool wasUpdated = false;
@@ -109,5 +84,6 @@ namespace c_final_capstone_v2.DAL
             }
             return wasUpdated;
         }
+
     }
 }

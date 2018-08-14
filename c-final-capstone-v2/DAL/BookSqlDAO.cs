@@ -20,6 +20,12 @@ namespace c_final_capstone_v2.DAL
         ") VALUES (@authors, @title, @genre, @shelfNumber, " +
         "@addDate)";
 
+        private static string sqlNewBookSearch = "SELECT book_id, title, authors, genre, shelf_number, " +
+            "add_date FROM book WHERE add_date > @UserLastSearch";
+
+        private static string sqlMasterSearch = "SELECT * FROM book WHERE " +
+            "authors LIKE @author AND title LIKE @title AND genre LIKE @genre @newOrNot";
+
         private string connectionString;
         // Constructor
         public BookSqlDAO(string connectionString)
@@ -139,43 +145,94 @@ namespace c_final_capstone_v2.DAL
             return wasAdded;
         }
 
-        //public List<Book> NewBookSearch(User user, string SearchValue)
-        //{
-        //    List<Book> searchResults = new List<Book>();
+        // Returns a list of all books that have been added since 
+        // the last time the user searched
+        public List<Book> NewBookList(User user)
+        {
+            List<Book> listResults = new List<Book>();
 
-        //    try
-        //    {
-        //        using (SqlConnection conn = new SqlConnection(connectionString))
-        //        {
-        //            conn.Open();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
 
-        //            SqlCommand cmd = new SqlCommand(sqlAuthorSearch, conn);
-        //            cmd.Parameters.AddWithValue("@searchValue", $"%{searchValue}%");
+                    SqlCommand cmd = new SqlCommand(sqlAuthorSearch, conn);
+                    cmd.Parameters.AddWithValue("@UserLastSearch", user.LastSearch);
 
 
-        //            SqlDataReader reader = cmd.ExecuteReader();
+                    SqlDataReader reader = cmd.ExecuteReader();
 
-        //            while (reader.Read())
-        //            {
-        //                Book book = new Book();
+                    while (reader.Read())
+                    {
+                        Book book = new Book();
 
-        //                book.Author = Convert.ToString(reader["authors"]);
-        //                book.AddDate = Convert.ToDateTime(reader["add_date"]);
-        //                book.BookId = Convert.ToInt32(reader["book_id"]);
-        //                book.Genre = Convert.ToString(reader["genre"]);
-        //                book.ShelfNumber = Convert.ToInt32(reader["shelf_number"]);
-        //                book.Title = Convert.ToString(reader["title"]);
+                        book.Author = Convert.ToString(reader["authors"]);
+                        book.AddDate = Convert.ToDateTime(reader["add_date"]);
+                        book.BookId = Convert.ToInt32(reader["book_id"]);
+                        book.Genre = Convert.ToString(reader["genre"]);
+                        book.ShelfNumber = Convert.ToInt32(reader["shelf_number"]);
+                        book.Title = Convert.ToString(reader["title"]);
 
-        //                searchResults.Add(book);
-        //            }
-        //        }
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        throw e;
-        //    }
+                        listResults.Add(book);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return listResults;
+        }
 
-        //    return searchResults;
-        //}
+
+        public List<Book> UltimateMasterSearchMethodOfAllSearchMethods(User user, string titleInput, string authorInput, string genreInput, bool newOrNot)
+        {
+            List<Book> searchResults = new List<Book>();
+
+            string newSearchString = "";
+
+            if (newOrNot)
+            {
+                newSearchString = $"AND add_date > {user.LastSearch}";
+            }
+           
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sqlAuthorSearch, conn);
+                    cmd.Parameters.AddWithValue("@author", $"%{authorInput}%");
+                    cmd.Parameters.AddWithValue("@title", $"%{titleInput}%");
+                    cmd.Parameters.AddWithValue("@genre", $"%{genreInput}%");
+                    cmd.Parameters.AddWithValue("@newOrNot", newSearchString);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Book book = new Book();
+
+                        book.Author = Convert.ToString(reader["authors"]);
+                        book.AddDate = Convert.ToDateTime(reader["add_date"]);
+                        book.BookId = Convert.ToInt32(reader["book_id"]);
+                        book.Genre = Convert.ToString(reader["genre"]);
+                        book.ShelfNumber = Convert.ToInt32(reader["shelf_number"]);
+                        book.Title = Convert.ToString(reader["title"]);
+
+                        searchResults.Add(book);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+
+            return searchResults;
+        }
     }
 }
