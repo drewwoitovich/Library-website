@@ -70,8 +70,28 @@ namespace c_final_capstone_v2.Tests.DAOs
             testResults = testDAO.SearchByAuthor("John");
 
             // Assert
-            Assert.AreEqual(1, testResults.Count);
+            Assert.AreEqual(2, testResults.Count);
             Assert.AreEqual("John Fulton", testResults[0].Author);
+        }
+
+        [TestMethod]
+        public void BookSqlDAOAddBookTest()
+        {
+            // Arrange
+            BookSqlDAO testDAO = new BookSqlDAO(connectionString);
+            Book testBook = new Book();
+            testBook.Author = "Alyson Wood";
+            testBook.Title = "Turtles";
+            testBook.Genre = "Non-fiction";
+            testBook.ShelfNumber = 7;
+
+            // Act
+            bool didWork = testDAO.AddBook(testBook);
+            List<Book> testList = testDAO.SearchByAuthor("Alyson");
+
+            // Assert
+            Assert.AreEqual(true, didWork);
+            Assert.AreEqual("Alyson Wood", testList[0].Author);
         }
     }
 }

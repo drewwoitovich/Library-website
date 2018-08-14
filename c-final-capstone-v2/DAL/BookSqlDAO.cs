@@ -12,8 +12,8 @@ namespace c_final_capstone_v2.DAL
         string sqlTitleSearch = "SELECT book_id, title, authors, genre, shelf_number, add_date " +
                "from book WHERE title LIKE @searchValue";
 
-        private static string sqlAuthorSearch = "SELECT title, authors, genre, shelf_number " +
-            "from book WHERE authors LIKE '%@searchValue%'";
+        private static string sqlAuthorSearch = "SELECT book_id, title, authors, genre, shelf_number, " +
+            " add_date from book WHERE authors LIKE @searchValue";
 
         private static string sqlAddBook = "INSERT INTO [dbo].[book] " +
         "([authors], [title], [genre], [shelf_number], [add_date]" +
@@ -79,7 +79,7 @@ namespace c_final_capstone_v2.DAL
                     conn.Open();
 
                     SqlCommand cmd = new SqlCommand(sqlAuthorSearch, conn);
-                    cmd.Parameters.AddWithValue("@searchValue", searchValue);
+                    cmd.Parameters.AddWithValue("@searchValue", $"%{searchValue}%");
 
 
                     SqlDataReader reader = cmd.ExecuteReader();
