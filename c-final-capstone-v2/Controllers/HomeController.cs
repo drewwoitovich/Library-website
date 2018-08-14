@@ -41,6 +41,11 @@ namespace c_final_capstone_v2.Controllers
             return View();
         }
 
+        public ActionResult Search()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult Search(Search s)
         {
@@ -62,7 +67,9 @@ namespace c_final_capstone_v2.Controllers
             {
                 return View("AddBook", b);
             }
+            bookDAO.AddBook(b);
             return RedirectToAction("Contact");
+
         }
     }
 }
