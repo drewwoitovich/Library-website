@@ -186,7 +186,7 @@ namespace c_final_capstone_v2.DAL
         }
 
 
-        public List<Book> MasterSearch(DateTime userLastSearch, string titleInput, string authorInput, string genreInput)
+        public List<Book> MasterSearch(string titleInput, string authorInput, string genreInput)
         {
             List<Book> searchResults = new List<Book>();
 

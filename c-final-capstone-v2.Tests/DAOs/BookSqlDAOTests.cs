@@ -102,7 +102,7 @@ namespace c_final_capstone_v2.Tests.DAOs
 
             // Act
             List<Book> testResults = new List<Book>();
-            testResults = testDAO.MasterSearch(Convert.ToDateTime("2018-08-01"), "Star", "John", "Test");
+            testResults = testDAO.MasterSearch("Star", "John", "Test");
 
             // Assert
             Assert.AreEqual(2, testResults.Count);
