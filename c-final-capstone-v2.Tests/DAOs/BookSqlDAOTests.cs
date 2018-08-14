@@ -93,6 +93,21 @@ namespace c_final_capstone_v2.Tests.DAOs
             Assert.AreEqual(true, didWork);
             Assert.AreEqual("Alyson Wood", testList[0].Author);
         }
+
+        [TestMethod]
+        public void MasterSearchTest()
+        {
+            // Arrange
+            BookSqlDAO testDAO = new BookSqlDAO(connectionString);
+
+            // Act
+            List<Book> testResults = new List<Book>();
+            testResults = testDAO.MasterSearch(Convert.ToDateTime("2018-08-01"), "Star", "John", "Test");
+
+            // Assert
+            Assert.AreEqual(2, testResults.Count);
+            Assert.AreEqual("John Fulton", testResults[0].Author);
+        }
     }
 }
 

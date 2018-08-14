@@ -24,7 +24,7 @@ namespace c_final_capstone_v2.DAL
             "add_date FROM book WHERE add_date > @UserLastSearch";
 
         private static string sqlMasterSearch = "SELECT * FROM book WHERE " +
-            "authors LIKE @author AND title LIKE @title AND genre LIKE @genre @newOrNot";
+            "authors LIKE @author AND title LIKE @title AND genre LIKE @genre";
 
         private string connectionString;
         // Constructor
@@ -186,28 +186,20 @@ namespace c_final_capstone_v2.DAL
         }
 
 
-        public List<Book> UltimateMasterSearchMethodOfAllSearchMethods(User user, string titleInput, string authorInput, string genreInput, bool newOrNot)
+        public List<Book> MasterSearch(DateTime userLastSearch, string titleInput, string authorInput, string genreInput)
         {
             List<Book> searchResults = new List<Book>();
 
-            string newSearchString = "";
-
-            if (newOrNot)
-            {
-                newSearchString = $"AND add_date > {user.LastSearch}";
-            }
-           
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand(sqlAuthorSearch, conn);
+                    SqlCommand cmd = new SqlCommand(sqlMasterSearch, conn);
                     cmd.Parameters.AddWithValue("@author", $"%{authorInput}%");
                     cmd.Parameters.AddWithValue("@title", $"%{titleInput}%");
                     cmd.Parameters.AddWithValue("@genre", $"%{genreInput}%");
-                    cmd.Parameters.AddWithValue("@newOrNot", newSearchString);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -230,7 +222,6 @@ namespace c_final_capstone_v2.DAL
             {
                 throw e;
             }
-
 
             return searchResults;
         }
