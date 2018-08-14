@@ -19,10 +19,22 @@ namespace c_final_capstone_v2.Tests.DAOs
     {
         public string connectionString = @"Data Source=.\sqlexpress;Initial Catalog=library;Integrated Security=True";
 
+        private TransactionScope scope;
+        private IBookSqlDAO dao;
+
         [TestInitialize]
         public void Initializer()
         {
+            scope = new TransactionScope();
+            dao = new BookSqlDAO(connectionString);
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
 
+                SqlCommand cmd = new SqlCommand("INSERT book (title, authors, genre, shelf_number, add_date)" +
+                                                "VALUES ('Star Wars', 'John Fulton', 'Test Genre', 2, '2018-08-14');", conn);
+                cmd.ExecuteNonQuery();
+            }
         }
 
         [TestMethod]
@@ -41,3 +53,4 @@ namespace c_final_capstone_v2.Tests.DAOs
         }
     }
 }
+
