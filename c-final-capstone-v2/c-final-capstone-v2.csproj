@@ -145,9 +145,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ForumController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="DAL\AuthorSqlDAO.cs" />
     <Compile Include="DAL\BookSqlDAO.cs" />
-    <Compile Include="DAL\IAuthorSqlDAO.cs" />
     <Compile Include="DAL\IBookSqlDAO.cs" />
     <Compile Include="DAL\IUserSqlDAO.cs" />
     <Compile Include="DAL\UserSqlDAO.cs" />
