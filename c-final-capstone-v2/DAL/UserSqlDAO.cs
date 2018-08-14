@@ -14,7 +14,11 @@ namespace c_final_capstone_v2.DAL
         ",[email]) VALUES (@username, @password, NULL, @isAdmin, " +
         "@newsletter, @email)";
 
-        private static string sqlGetDateOfLastSearch = "SELECT last_search from [user] where user_id = @UserId";
+        private static string sqlGetDateOfLastSearch = "SELECT last_search " +
+            "from [user] where user_id = @UserId";
+
+        private static string sqlUpdateUsersLastSearch = "UPDATE [dbo].[user] " +
+            "SET[last_search] = @DateTimeNow WHERE user_id = @UserId";
 
         private string connectionString;
         // Constructor
@@ -76,6 +80,34 @@ namespace c_final_capstone_v2.DAL
                 throw e;
             }
             return user.LastSearch;
+        }
+
+        public bool UpdateUsersLastSearch(User user)
+        {
+            bool wasUpdated = false;
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sqlUpdateUsersLastSearch, conn);
+                    cmd.Parameters.AddWithValue("@DateTimeNow", Convert.ToString(DateTime.Now));
+                    cmd.Parameters.AddWithValue("@UserId", user.UserId);
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        wasUpdated = true;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return wasUpdated;
         }
     }
 }
