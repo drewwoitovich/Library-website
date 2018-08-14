@@ -23,7 +23,7 @@ namespace c_final_capstone_v2.Controllers
 
         public ActionResult Index()
         {
-            List<Book> test = bookDAO.SearchByTitle("Star");
+            List<Book> test = bookDAO.SearchByTitle("1984");
             return View("Index", test);
         }
 
