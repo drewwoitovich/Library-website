@@ -1,14 +1,21 @@
 ﻿@using c_final_capstone_v2.Models
-@model List<Book>
-@{
-    ViewBag.Title = "Home Page";
-}
+@model Search
 
-<div class="jumbotron">
-    <ul>
-    @foreach(Book b in Model)
-    {
-        <li>@b.Title</li>
-    }
-    </ul>
-</div>
+<h2>Search</h2>
+@using (Html.BeginForm("Search", "Home", FormMethod.Post))
+{
+    <div class="formValidationGroup">
+        @Html.LabelFor(m => m.TitleSearchInput)
+        @Html.TextBoxFor(m => m.TitleSearchInput, new { placeholder = "Title" })
+    </div>
+    <div class="formValidationGroup">
+        @Html.LabelFor(m => m.AuthorSearchInput)
+        @Html.TextBoxFor(m => m.AuthorSearchInput, new { placeholder = "Author" })
+    </div>
+    <div class="formValidationGroup">
+        @Html.LabelFor(m => m.GenreSearchInput)
+        @Html.TextBoxFor(m => m.GenreSearchInput, new { placeholder = "Genre" })
+    </div>
+    <button class="formSubmitButton">Search</button>
+
+}

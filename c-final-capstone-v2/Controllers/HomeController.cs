@@ -40,5 +40,15 @@ namespace c_final_capstone_v2.Controllers
 
             return View();
         }
+
+        [HttpPost]
+        public ActionResult Search(Search s)
+        {
+            List<Book> results = bookDAO.MasterSearch(s.TitleSearchInput, s.AuthorSearchInput, s.GenreSearchInput);
+            // Update user last search date
+            return View("Search", results);
+        }
+
+
     }
 }
