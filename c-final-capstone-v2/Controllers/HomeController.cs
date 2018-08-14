@@ -11,13 +11,11 @@ namespace c_final_capstone_v2.Controllers
     public class HomeController : Controller
     {
         private readonly IBookSqlDAO bookDAO;
-        private readonly IAuthorSqlDAO authorDAO;
         private readonly IUserSqlDAO userDAO;
 
-        public HomeController(IBookSqlDAO bookDAO, IAuthorSqlDAO authorDAO, IUserSqlDAO userDAO)
+        public HomeController(IBookSqlDAO bookDAO, IUserSqlDAO userDAO)
         {
             this.bookDAO = bookDAO;
-            this.authorDAO = authorDAO;
             this.userDAO = userDAO;
         }
 
