@@ -17,27 +17,47 @@ namespace c_final_capstone_v2.Tests.DAOs
     [TestClass]
     public class BookSqlDAOTests
     {
-        public string connectionString = @"Data Source=.\sqlexpress;Initial Catalog=library;Integrated Security=True";
+        // public string connectionString = ConfigurationManager.ConnectionStrings["libraryConnection"].ConnectionString;
+        private string connectionString = @"Data Source=.\sqlexpress;Initial Catalog=library;Integrated Security=True";
+
+        private TransactionScope scope;
+        private IBookSqlDAO dao;
 
         [TestInitialize]
         public void Initializer()
         {
+            scope = new TransactionScope();
+            dao = new BookSqlDAO(connectionString);
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
 
+                SqlCommand cmd = new SqlCommand("INSERT book (title, authors, genre, shelf_number, add_date)" +
+                                                "VALUES ('Star Wars', 'John Fulton', 'Test Genre', 2, '2018-08-14');", conn);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        [TestCleanup]
+        public void Cleanup()
+        {
+            scope.Dispose();
         }
 
         [TestMethod]
-        public void BookSqlDAOSearchByTitle()
+        public void BookSqlDAOSearchByTitleTest()
         {
             // Arrange
-            IBookSqlDAO testDAO = new BookSqlDAO(connectionString);
+            BookSqlDAO testDAO = new BookSqlDAO(connectionString);
 
             // Act
             List<Book> testResults = new List<Book>();
             testResults = testDAO.SearchByTitle("Star Wars");
 
             // Assert
-            Assert.AreEqual(1, testResults.Count);
+            Assert.AreEqual(3, testResults.Count);
             Assert.AreEqual("Star Wars", testResults[0].Title);
         }
     }
 }
+
