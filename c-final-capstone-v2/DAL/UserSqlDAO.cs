@@ -14,6 +14,8 @@ namespace c_final_capstone_v2.DAL
         ",[email]) VALUES (@username, @password, NULL, @isAdmin, " +
         "@newsletter, @email)";
 
+        private static string sqlGetDateOfLastSearch = "SELECT last_search from [user] where user_id = @UserId";
+
         private string connectionString;
         // Constructor
         public UserSqlDAO(string connectionString)
@@ -49,5 +51,31 @@ namespace c_final_capstone_v2.DAL
             }
         }
 
+        public DateTime GetDateOfLastSearch(User user)
+        {
+            
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sqlGetDateOfLastSearch, conn);
+                    cmd.Parameters.AddWithValue("@UserId", user.UserId);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        user.LastSearch = Convert.ToDateTime(reader["last_search"]);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return user.LastSearch;
+        }
     }
 }

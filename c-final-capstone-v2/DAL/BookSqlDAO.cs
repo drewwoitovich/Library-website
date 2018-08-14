@@ -138,5 +138,44 @@ namespace c_final_capstone_v2.DAL
             }
             return wasAdded;
         }
+
+        //public List<Book> NewBookSearch(User user, string SearchValue)
+        //{
+        //    List<Book> searchResults = new List<Book>();
+
+        //    try
+        //    {
+        //        using (SqlConnection conn = new SqlConnection(connectionString))
+        //        {
+        //            conn.Open();
+
+        //            SqlCommand cmd = new SqlCommand(sqlAuthorSearch, conn);
+        //            cmd.Parameters.AddWithValue("@searchValue", $"%{searchValue}%");
+
+
+        //            SqlDataReader reader = cmd.ExecuteReader();
+
+        //            while (reader.Read())
+        //            {
+        //                Book book = new Book();
+
+        //                book.Author = Convert.ToString(reader["authors"]);
+        //                book.AddDate = Convert.ToDateTime(reader["add_date"]);
+        //                book.BookId = Convert.ToInt32(reader["book_id"]);
+        //                book.Genre = Convert.ToString(reader["genre"]);
+        //                book.ShelfNumber = Convert.ToInt32(reader["shelf_number"]);
+        //                book.Title = Convert.ToString(reader["title"]);
+
+        //                searchResults.Add(book);
+        //            }
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw e;
+        //    }
+
+        //    return searchResults;
+        //}
     }
 }
