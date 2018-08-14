@@ -9,12 +9,6 @@ namespace c_final_capstone_v2.DAL
 {
     public class BookSqlDAO : IBookSqlDAO
     {
-        string sqlTitleSearch = "SELECT book_id, title, authors, genre, shelf_number, add_date " +
-               "from book WHERE title LIKE @searchValue";
-
-        private static string sqlAuthorSearch = "SELECT book_id, title, authors, genre, shelf_number, " +
-            " add_date from book WHERE authors LIKE @searchValue";
-
         private static string sqlAddBook = "INSERT INTO [dbo].[book] " +
         "([authors], [title], [genre], [shelf_number], [add_date]" +
         ") VALUES (@authors, @title, @genre, @shelfNumber, " +
