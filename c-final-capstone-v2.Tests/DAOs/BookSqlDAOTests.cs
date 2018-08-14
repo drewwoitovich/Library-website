@@ -44,35 +44,6 @@ namespace c_final_capstone_v2.Tests.DAOs
             scope.Dispose();
         }
 
-        [TestMethod]
-        public void BookSqlDAOSearchByTitleTest()
-        {
-            // Arrange
-            BookSqlDAO testDAO = new BookSqlDAO(connectionString);
-
-            // Act
-            List<Book> testResults = new List<Book>();
-            testResults = testDAO.SearchByTitle("Star Wars");
-
-            // Assert
-            Assert.AreEqual(3, testResults.Count);
-            Assert.AreEqual("Star Wars", testResults[0].Title);
-        }
-
-        [TestMethod]
-        public void BookSqlDAOSearchByAuthorTest()
-        {
-            // Arrange
-            BookSqlDAO testDAO = new BookSqlDAO(connectionString);
-
-            // Act
-            List<Book> testResults = new List<Book>();
-            testResults = testDAO.SearchByAuthor("John");
-
-            // Assert
-            Assert.AreEqual(2, testResults.Count);
-            Assert.AreEqual("John Fulton", testResults[0].Author);
-        }
 
         [TestMethod]
         public void BookSqlDAOAddBookTest()
@@ -87,7 +58,7 @@ namespace c_final_capstone_v2.Tests.DAOs
 
             // Act
             bool didWork = testDAO.AddBook(testBook);
-            List<Book> testList = testDAO.SearchByAuthor("Alyson");
+            List<Book> testList = testDAO.MasterSearch("", "Alyson", "");
 
             // Assert
             Assert.AreEqual(true, didWork);
@@ -103,6 +74,22 @@ namespace c_final_capstone_v2.Tests.DAOs
             // Act
             List<Book> testResults = new List<Book>();
             testResults = testDAO.MasterSearch("Star", "John", "Test");
+
+            // Assert
+            Assert.AreEqual(2, testResults.Count);
+            Assert.AreEqual("John Fulton", testResults[0].Author);
+        }
+
+
+        [TestMethod]
+        public void MasterSearchNewBookTest()
+        {
+            // Arrange
+            BookSqlDAO testDAO = new BookSqlDAO(connectionString);
+
+            // Act
+            List<Book> testResults = new List<Book>();
+            testResults = testDAO.MasterSearchNewBooks(Convert.ToDateTime("2018-06-30"), "Star", "", "");
 
             // Assert
             Assert.AreEqual(2, testResults.Count);
