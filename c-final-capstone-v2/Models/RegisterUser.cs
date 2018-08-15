@@ -6,17 +6,23 @@ using System.ComponentModel.DataAnnotations;
 
 namespace c_final_capstone_v2.Models
 {
-    public class User
+    public class RegisterUser
     {
+        [Required]
         public string Username { get; set; }
+
+        [Required]
+        [MinLength(8, ErrorMessage = "Please enter a password that is at least 8 characters.")]
         public string Password { get; set; }
+
+        [Compare("Password")]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name = "Subscribe to our newsletter")]
         public bool Newsletter { get; set; }
+
+        [Required]
+        [EmailAddress]
         public string Email { get; set; }
-        public List<Book> BooksToRead { get; set; }
-        public List<Book> BooksRead { get; set; }
-        public DateTime LastSearch { get; set; }
-        public bool IsAdmin { get; set; }
-        public int UserId { get; set; }
     }
 }

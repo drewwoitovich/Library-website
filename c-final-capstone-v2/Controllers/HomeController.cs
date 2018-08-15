@@ -68,7 +68,7 @@ namespace c_final_capstone_v2.Controllers
                 return View("AddBook", b);
             }
             bookDAO.AddBook(b);
-            return RedirectToAction("Contact");
+            return RedirectToAction("Search");
         }
 
         public ActionResult Login()
@@ -76,10 +76,36 @@ namespace c_final_capstone_v2.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public ActionResult Login()
-        //{
+        [HttpPost]
+        public ActionResult Login(LoginUser lu)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Login", lu);
+            }
+            userDAO.UserLogin(lu.Username, lu.Password);
+            return RedirectToAction("UserProfile");
+        }
 
-        //}
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Register(RegisterUser ru)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Login", ru);
+            }
+            userDAO.CreateUser(ru);
+            return RedirectToAction("UserProfile");
+        }
+
+        public ActionResult UserProfile()
+        {
+            return View();
+        }
     }
 }
