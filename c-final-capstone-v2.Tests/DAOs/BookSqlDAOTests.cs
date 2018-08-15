@@ -62,7 +62,7 @@ namespace c_final_capstone_v2.Tests.DAOs
 
             // Assert
             Assert.AreEqual(true, didWork);
-            Assert.AreEqual("Alyson Wood", testList[0].Author);
+            Assert.AreEqual("Alyson Wood, Drew Woitovich", testList[0].Author);
         }
 
         [TestMethod]
@@ -76,7 +76,7 @@ namespace c_final_capstone_v2.Tests.DAOs
             testResults = testDAO.MasterSearch("Star", "John", "Test");
 
             // Assert
-            Assert.AreEqual(2, testResults.Count);
+            Assert.AreEqual(1, testResults.Count);
             Assert.AreEqual("John Fulton", testResults[0].Author);
         }
 
@@ -89,11 +89,11 @@ namespace c_final_capstone_v2.Tests.DAOs
 
             // Act
             List<Book> testResults = new List<Book>();
-            testResults = testDAO.MasterSearchNewBooks(Convert.ToDateTime("2018-06-30"), "Star", "", "");
+            testResults = testDAO.MasterSearchNewBooks(Convert.ToDateTime("2018-08-10"), "Cats", "", "");
 
             // Assert
-            Assert.AreEqual(2, testResults.Count);
-            Assert.AreEqual("John Fulton", testResults[0].Author);
+            Assert.AreEqual(1, testResults.Count);
+            Assert.AreEqual("Bradon Studebaker, John Fulton", testResults[0].Author);
         }
     }
 }

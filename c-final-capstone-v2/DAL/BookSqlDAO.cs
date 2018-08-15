@@ -21,7 +21,7 @@ namespace c_final_capstone_v2.DAL
             "authors LIKE @author AND title LIKE @title AND genre LIKE @genre";
 
         private static string sqlMasterSearchNewBook = "SELECT * FROM book WHERE " +
-           "authors LIKE @author AND title LIKE @title AND genre LIKE @genre AND add_date > @lastUserSearch";
+           "authors LIKE @author AND title LIKE @title AND genre LIKE @genre AND add_date >= @lastUserSearch";
 
 
         private string connectionString;
@@ -160,7 +160,7 @@ namespace c_final_capstone_v2.DAL
                     cmd.Parameters.AddWithValue("@author", $"%{authorInput}%");
                     cmd.Parameters.AddWithValue("@title", $"%{titleInput}%");
                     cmd.Parameters.AddWithValue("@genre", $"%{genreInput}%");
-                    cmd.Parameters.AddWithValue("@lastUserSearch", lastUserSearch);
+                    cmd.Parameters.AddWithValue("@lastUserSearch", lastUserSearch.Date);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 

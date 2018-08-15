@@ -47,11 +47,19 @@ namespace c_final_capstone_v2.Controllers
         }
 
         [HttpPost]
-        public ActionResult SearchResults(Search s)
+        public ActionResult SearchResults(Search s, bool newSearch)
         {
-            List<Book> results = bookDAO.MasterSearch(s.TitleSearchInput, s.AuthorSearchInput, s.GenreSearchInput);
+            if (!newSearch)
+            {
+                List<Book> results = bookDAO.MasterSearch(s.TitleSearchInput, s.AuthorSearchInput, s.GenreSearchInput);
+                return View("SearchResults", results);
+            }
             // Update user last search date
-            return View("SearchResults", results);
+            else
+            {
+                List<Book> results = bookDAO.MasterSearchNewBooks(s.DateTimeSearchInput, s.TitleSearchInput, s.AuthorSearchInput, s.GenreSearchInput);
+                return View("SearchResults", results);
+            }
         }
 
         // Get Form for adding a book
