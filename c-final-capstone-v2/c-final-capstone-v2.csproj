@@ -207,6 +207,7 @@
     <Content Include="Views\Home\UserProfile.cshtml" />
     <Content Include="Views\Home\_RegisterPartial.cshtml" />
     <Content Include="Views\Forum\ForumPosts.cshtml" />
+    <Content Include="Views\Forum\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

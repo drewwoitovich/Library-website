@@ -26,5 +26,21 @@ namespace c_final_capstone_v2.Controllers
             List<ForumPost> allPosts = forumDAO.GetAllFoumPosts();
             return View("ForumPosts", allPosts);
         }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(ForumPost post)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Create", post);
+            }
+            
+            return RedirectToAction("ForumPosts");
+        }
     }
 }

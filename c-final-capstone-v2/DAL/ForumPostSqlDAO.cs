@@ -18,7 +18,10 @@ namespace c_final_capstone_v2.DAL
         }
 
         private static string sqlGetAllForumPosts = "SELECT [username], [message] FROM forum";
-           
+
+        private static string sqlCreateForumPost = "INSERT INTO[dbo].[forum] ([username] " +
+          " ,[message]) VALUES (@username, @message)";
+
         public List<ForumPost> GetAllFoumPosts()
         {
             List<ForumPost> allPosts = new List<ForumPost>();
@@ -50,6 +53,34 @@ namespace c_final_capstone_v2.DAL
                 throw e;
             }
             return allPosts;
+        }
+
+        public bool CreatePost(ForumPost post)
+        {
+            bool wasAdded = false;
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sqlCreateForumPost, conn);
+                    cmd.Parameters.AddWithValue("@username", post.Username);
+                    cmd.Parameters.AddWithValue("@message", post.Message);
+
+                    int count = cmd.ExecuteNonQuery();
+                    if (count > 0)
+                    {
+                        wasAdded = true;
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return wasAdded;
         }
     }
 }
