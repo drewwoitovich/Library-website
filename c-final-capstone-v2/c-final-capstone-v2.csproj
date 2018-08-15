@@ -146,6 +146,7 @@
     <Compile Include="Controllers\ForumController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DAL\BookSqlDAO.cs" />
+    <Compile Include="DAL\ForumPostSqlDAO.cs" />
     <Compile Include="DAL\IBookSqlDAO.cs" />
     <Compile Include="DAL\IUserSqlDAO.cs" />
     <Compile Include="DAL\UserSqlDAO.cs" />
@@ -153,6 +154,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Book.cs" />
+    <Compile Include="Models\ForumPost.cs" />
     <Compile Include="Models\LoginUser.cs" />
     <Compile Include="Models\RegisterUser.cs" />
     <Compile Include="Models\Search.cs" />
