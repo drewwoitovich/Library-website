@@ -4,22 +4,24 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using c_final_capstone_v2.DAL;
+using System.Configuration;
+using c_final_capstone_v2.Models;
 
 namespace c_final_capstone_v2.Controllers
 {
     public class ForumController : Controller
     {
-        private readonly IUserSqlDAO userDAO;
+        string connectionString = ConfigurationManager.ConnectionStrings["libraryConnection"].ConnectionString;
 
-        public ForumController(IUserSqlDAO userDAO)
+        public ForumController()
         {
-            this.userDAO = userDAO;
+            ForumPostSqlDAO forumDAO = new ForumPostSqlDAO(connectionString);
         }
 
         // GET: Forum
-        public ActionResult Index()
+        public ActionResult ForumPosts()
         {
-            return View();
+            return View("ForumPosts");
         }
     }
 }
