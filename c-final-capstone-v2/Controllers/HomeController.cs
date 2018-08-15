@@ -47,9 +47,9 @@ namespace c_final_capstone_v2.Controllers
         }
 
         [HttpPost]
-        public ActionResult SearchResults(Search s, bool newSearch)
+        public ActionResult SearchResults(Search s)
         {
-            if (!newSearch)
+            if (!s.NewSearch)
             {
                 List<Book> results = bookDAO.MasterSearch(s.TitleSearchInput, s.AuthorSearchInput, s.GenreSearchInput);
                 return View("SearchResults", results);

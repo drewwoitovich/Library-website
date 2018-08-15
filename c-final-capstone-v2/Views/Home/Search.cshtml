@@ -15,20 +15,15 @@
 
         @Html.TextBoxFor(m => m.GenreSearchInput, new { placeholder = "Genre", @class = "form-control" })
     </div>
-    <div class="checkbox">
-
+    <div class="formValidationGroup form-group">
+        @Html.LabelFor(m => m.NewSearch)
+        @Html.CheckBoxFor(m => m.NewSearch)
     </div>
-    <fieldset>
-        <legend>Search for books added since:</legend>
-
-        <div>
-            <label for="book-search-date"></label>
-            <input type="date" id="start" name="trip"
-                   value="2018-01-01"
-                   min="2018-01-01" max="2018-12-31" />
-        </div>
-    </fieldset>
-    <button class="formSubmitButton btn btn-default">Search</button>
-
-
+    @Html.TextBoxFor(model => model.DateTimeSearchInput,
+        new { type = "date" })
+    <div class="">
+        <button class="formSubmitButton btn btn-default">Search</button>
+    </div>
 }
+
+

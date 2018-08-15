@@ -20,7 +20,6 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Search", "Search", "Home")</li>
                     <li>@Html.ActionLink("Forum", "Index", "Forum")</li>
                 </ul>
@@ -42,5 +41,6 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script src="~/Scripts/toggle-date.js"></script>
 </body>
 </html>
