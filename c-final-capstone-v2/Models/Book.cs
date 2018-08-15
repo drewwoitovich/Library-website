@@ -20,8 +20,10 @@ namespace c_final_capstone_v2.Models
         public string Genre { get; set; }
 
         [Required]
+        [Display(Name = "Shelf Number")]
         public int ShelfNumber { get; set; }
 
+        [Display(Name = "Add Date")]
         public DateTime AddDate { get; set; }
     }
 }

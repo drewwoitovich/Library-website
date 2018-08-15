@@ -47,11 +47,11 @@ namespace c_final_capstone_v2.Controllers
         }
 
         [HttpPost]
-        public ActionResult Search(Search s)
+        public ActionResult SearchResults(Search s)
         {
             List<Book> results = bookDAO.MasterSearch(s.TitleSearchInput, s.AuthorSearchInput, s.GenreSearchInput);
             // Update user last search date
-            return View("Search", results);
+            return View("SearchResults", results);
         }
 
         // Get Form for adding a book
@@ -69,7 +69,17 @@ namespace c_final_capstone_v2.Controllers
             }
             bookDAO.AddBook(b);
             return RedirectToAction("Contact");
-
         }
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        //[HttpPost]
+        //public ActionResult Login()
+        //{
+
+        //}
     }
 }
