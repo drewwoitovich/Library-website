@@ -148,6 +148,7 @@
     <Compile Include="DAL\BookSqlDAO.cs" />
     <Compile Include="DAL\ForumPostSqlDAO.cs" />
     <Compile Include="DAL\IBookSqlDAO.cs" />
+    <Compile Include="DAL\IForumPostSqlDAO.cs" />
     <Compile Include="DAL\IUserSqlDAO.cs" />
     <Compile Include="DAL\UserSqlDAO.cs" />
     <Compile Include="Global.asax.cs">

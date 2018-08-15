@@ -13,15 +13,18 @@ namespace c_final_capstone_v2.Controllers
     {
         string connectionString = ConfigurationManager.ConnectionStrings["libraryConnection"].ConnectionString;
 
+        private IForumPostSqlDAO forumDAO;
+
         public ForumController()
         {
-            ForumPostSqlDAO forumDAO = new ForumPostSqlDAO(connectionString);
+            forumDAO = new ForumPostSqlDAO(connectionString);
         }
 
         // GET: Forum
         public ActionResult ForumPosts()
         {
-            return View("ForumPosts");
+            List<ForumPost> allPosts = forumDAO.GetAllFoumPosts();
+            return View("ForumPosts", allPosts);
         }
     }
 }

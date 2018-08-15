@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace c_final_capstone_v2.DAL
 {
-    public class ForumPostSqlDAO
+    public class ForumPostSqlDAO : IForumPostSqlDAO
     {
 
         private string connectionString;
