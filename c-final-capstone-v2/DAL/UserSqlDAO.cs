@@ -34,6 +34,7 @@ namespace c_final_capstone_v2.DAL
         // the users table in the connected database
         public bool CreateUser(User newUser)
         {
+
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -58,6 +59,48 @@ namespace c_final_capstone_v2.DAL
             {
                 throw ex;
             }
+        }
+
+        public List<string> GetUsernames()
+        {
+            List<string> usernames = new List<string>();
+
+            try
+            {
+                string sql = $"SELECT username FROM [user];";
+
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        usernames.Add(Convert.ToString(reader["username"]));
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+
+            return usernames;
+        }
+
+        public bool CheckUsernameAvailability(string username, List<string> allUsernames)
+        {
+            bool isAvailable = true;
+
+            foreach (string takenUsername in allUsernames)
+            {
+                if (username.ToLower() == takenUsername.ToLower())
+                {
+                    isAvailable = false;
+                }
+            }
+            return isAvailable;
         }
 
         //public User UserLogin(string username, string password)
