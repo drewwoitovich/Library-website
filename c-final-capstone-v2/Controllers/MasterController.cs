@@ -10,7 +10,6 @@ namespace c_final_capstone_v2.Controllers
 {
     public class MasterController : Controller
     {
-
         private const string UsernameKey = "Library_Username";
         private const string IsAdminKey = "Is_Admin";
         private readonly IUserSqlDAO userDAO;
