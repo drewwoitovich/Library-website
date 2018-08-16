@@ -18,7 +18,7 @@ namespace c_final_capstone_v2.DAL
             "from [user] where user_id = @UserId";
 
         private static string sqlUpdateUsersLastSearch = "UPDATE [dbo].[user] " +
-            "SET[last_search] = @DateTimeNow WHERE user_id = @UserId";
+            "SET[last_search] = @DateTimeNow WHERE username = @Username";
 
         private static string sqlLogin = "SELECT * FROM [user] WHERE username = " +
             "@username AND password = @password";
@@ -58,36 +58,6 @@ namespace c_final_capstone_v2.DAL
             {
                 throw ex;
             }
-        }
-
-        // Takes in a user and updates their last_search field
-        // in the database to the current date and time
-        public bool UpdateUsersLastSearch(User user)
-        {
-            bool wasUpdated = false;
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    conn.Open();
-
-                    SqlCommand cmd = new SqlCommand(sqlUpdateUsersLastSearch, conn);
-                    cmd.Parameters.AddWithValue("@DateTimeNow", Convert.ToString(DateTime.Now));
-                    cmd.Parameters.AddWithValue("@UserId", user.UserId);
-
-                    int rowsAffected = cmd.ExecuteNonQuery();
-
-                    if (rowsAffected > 0)
-                    {
-                        wasUpdated = true;
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-            return wasUpdated;
         }
 
         //public User UserLogin(string username, string password)
