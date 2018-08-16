@@ -13,5 +13,7 @@ namespace c_final_capstone_v2.Models
         
         [Required]
         public string Password { get; set; }
+
+        public bool IsAdmin { get; set; }
     }
 }
