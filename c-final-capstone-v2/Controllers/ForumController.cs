@@ -27,9 +27,10 @@ namespace c_final_capstone_v2.Controllers
         }
 
         // GET: Forum
-        public ActionResult Index()
+        public ActionResult ForumPosts()
         {
-            return View();
+            var conversations = forumDAO.GetAllForumPosts();
+            return View("Dashboard", conversations);
         }
     }
 }
