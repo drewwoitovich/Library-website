@@ -9,18 +9,18 @@ namespace c_final_capstone_v2.DAL
 {
     public class ForumPostSqlDAO : IForumPostSqlDAO
     {
+        private static string sqlGetAllForumPosts = "SELECT [username], [message] FROM forum";
+
+        private static string sqlCreateForumPost = "INSERT INTO[dbo].[forum] ([username] " +
+          " ,[message]) VALUES (@username, @message)";
 
         private string connectionString;
+
         // Constructor
         public ForumPostSqlDAO(string connectionString)
         {
             this.connectionString = connectionString;
         }
-
-        private static string sqlGetAllForumPosts = "SELECT [username], [message] FROM forum";
-
-        private static string sqlCreateForumPost = "INSERT INTO[dbo].[forum] ([username] " +
-          " ,[message]) VALUES (@username, @message)";
 
         public List<ForumPost> GetAllForumPosts()
         {

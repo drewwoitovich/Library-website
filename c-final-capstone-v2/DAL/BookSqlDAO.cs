@@ -10,9 +10,8 @@ namespace c_final_capstone_v2.DAL
     public class BookSqlDAO : IBookSqlDAO
     {
         private static string sqlAddBook = "INSERT INTO [dbo].[book] " +
-        "([authors], [title], [genre], [shelf_number], [add_date]" +
-        ") VALUES (@authors, @title, @genre, @shelfNumber, " +
-        "@addDate)";
+        "([authors], [title], [genre], [shelf_number], [add_date]) " +
+        "VALUES (@authors, @title, @genre, @shelfNumber, @addDate)";
 
         private static string sqlMasterSearch = "SELECT * FROM book WHERE " +
             "authors LIKE @author AND title LIKE @title AND genre LIKE @genre";
@@ -22,8 +21,8 @@ namespace c_final_capstone_v2.DAL
 
         private static string sqlGetAllGenres = @"SELECT DISTINCT genre FROM book GROUP BY genre;";
 
-
         private string connectionString;
+
         // Constructor
         public BookSqlDAO(string connectionString)
         {
@@ -53,7 +52,6 @@ namespace c_final_capstone_v2.DAL
                     {
                         wasAdded = true;
                     }
-                    
                 }
             }
             catch (Exception e)
@@ -67,7 +65,6 @@ namespace c_final_capstone_v2.DAL
         public List<Book> MasterSearch(string titleInput, string authorInput, string genreInput)
         {
             List<Book> searchResults = new List<Book>();
-
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -108,7 +105,6 @@ namespace c_final_capstone_v2.DAL
         public List<Book> MasterSearchNewBooks(DateTime lastUserSearch, string titleInput, string authorInput, string genreInput)
         {
             List<Book> searchResults = new List<Book>();
-
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -149,7 +145,6 @@ namespace c_final_capstone_v2.DAL
         public List<string> GetAllGenres()
         {
             List<string> allGenresList = new List<string>();
-
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
