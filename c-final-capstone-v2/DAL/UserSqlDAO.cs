@@ -18,7 +18,7 @@ namespace c_final_capstone_v2.DAL
             "from [user] where user_id = @UserId";
 
         private static string sqlUpdateUsersLastSearch = "UPDATE [dbo].[user] " +
-            "SET[last_search] = @DateTimeNow WHERE user_id = @UserId";
+            "SET[last_search] = @DateTimeNow WHERE username = @Username";
 
         private static string sqlLogin = "SELECT * FROM [user] WHERE username = " +
             "@username AND password = @password";
@@ -34,6 +34,7 @@ namespace c_final_capstone_v2.DAL
         // the users table in the connected database
         public bool CreateUser(User newUser)
         {
+
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -60,34 +61,46 @@ namespace c_final_capstone_v2.DAL
             }
         }
 
-        // Takes in a user and updates their last_search field
-        // in the database to the current date and time
-        public bool UpdateUsersLastSearch(User user)
+        public List<string> GetUsernames()
         {
-            bool wasUpdated = false;
+            List<string> usernames = new List<string>();
+
             try
             {
+                string sql = $"SELECT username FROM [user];";
+
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand(sqlUpdateUsersLastSearch, conn);
-                    cmd.Parameters.AddWithValue("@DateTimeNow", Convert.ToString(DateTime.Now));
-                    cmd.Parameters.AddWithValue("@UserId", user.UserId);
-
-                    int rowsAffected = cmd.ExecuteNonQuery();
-
-                    if (rowsAffected > 0)
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
                     {
-                        wasUpdated = true;
+                        usernames.Add(Convert.ToString(reader["username"]));
                     }
                 }
             }
-            catch (Exception e)
+            catch (SqlException ex)
             {
-                throw e;
+                throw;
             }
-            return wasUpdated;
+
+            return usernames;
+        }
+
+        public bool CheckUsernameAvailability(string username, List<string> allUsernames)
+        {
+            bool isAvailable = true;
+
+            foreach (string takenUsername in allUsernames)
+            {
+                if (username.ToLower() == takenUsername.ToLower())
+                {
+                    isAvailable = false;
+                }
+            }
+            return isAvailable;
         }
 
         //public User UserLogin(string username, string password)

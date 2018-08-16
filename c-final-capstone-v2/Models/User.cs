@@ -17,6 +17,5 @@ namespace c_final_capstone_v2.Models
         public List<Book> BooksRead { get; set; }
         public DateTime LastSearch { get; set; }
         public bool IsAdmin { get; set; }
-        public int UserId { get; set; }
     }
 }
