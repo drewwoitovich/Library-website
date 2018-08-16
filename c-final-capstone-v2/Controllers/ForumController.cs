@@ -27,9 +27,28 @@ namespace c_final_capstone_v2.Controllers
         }
 
         // GET: Forum
-        public ActionResult Index()
+        public ActionResult ForumPosts()
         {
-            return View();
+            var conversations = forumDAO.GetAllForumPosts();
+            return View("Dashboard", conversations);
+        }
+
+        public ActionResult Create()
+        {
+            return View("Create");   
+        }
+
+        [HttpPost]
+        public ActionResult Create(ForumPost post)
+        {
+            if (base.IsAuthenticated)
+            {
+                post.Username = CurrentUser;
+                forumDAO.CreatePost(post);
+                return RedirectToAction("Dashboard", "Forum", new { username = base.CurrentUser });
+            }
+            var model = new LoginUser();
+            return View("Login", "User", model);
         }
     }
 }
