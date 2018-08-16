@@ -77,7 +77,7 @@ namespace c_final_capstone_v2.DAL
                     conn.Open();
 
                     SqlCommand cmd = new SqlCommand(sqlNewBookSearch, conn);
-                    cmd.Parameters.AddWithValue("@UserLastSearch", user.LastSearch);
+                    //cmd.Parameters.AddWithValue("@UserLastSearch", user.LastSearch);
 
 
                     SqlDataReader reader = cmd.ExecuteReader();

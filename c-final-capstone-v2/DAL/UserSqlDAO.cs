@@ -10,8 +10,8 @@ namespace c_final_capstone_v2.DAL
     public class UserSqlDAO : IUserSqlDAO
     {
         private static string sqlCreateUser = "INSERT INTO [dbo].[user] " +
-        "([username], [password], [last_search], [is_admin], [newsletter] " +
-        ",[email]) VALUES (@username, @password, NULL, NULL, " +
+        "([username], [password], [is_admin], [newsletter] " +
+        ",[email]) VALUES (@username, @password, NULL, " +
         "@newsletter, @email)";
 
         private static string sqlGetDateOfLastSearch = "SELECT last_search " +
