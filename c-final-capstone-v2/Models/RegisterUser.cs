@@ -16,6 +16,7 @@ namespace c_final_capstone_v2.Models
         public string Password { get; set; }
 
         [Compare("Password")]
+        [Display(Name = "Confirm Password")]
         public string ConfirmPassword { get; set; }
 
         [Display(Name = "Subscribe to our newsletter")]

@@ -35,7 +35,12 @@ namespace c_final_capstone_v2.Controllers
 
         public ActionResult Create()
         {
-            return View("Create");   
+            if (base.IsAuthenticated)
+            {
+                return View("Create");
+            }
+            var model = new LoginUser();
+            return View("Login", "User", model);
         }
 
         [HttpPost]
