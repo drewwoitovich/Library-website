@@ -4,43 +4,32 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using c_final_capstone_v2.DAL;
-using System.Configuration;
 using c_final_capstone_v2.Models;
 
 namespace c_final_capstone_v2.Controllers
 {
-    public class ForumController : Controller
+    public class ForumController : MasterController
     {
-        string connectionString = ConfigurationManager.ConnectionStrings["libraryConnection"].ConnectionString;
 
-        private IForumPostSqlDAO forumDAO;
+        private readonly IForumPostSqlDAO forumDAO;
 
-        public ForumController()
+        public ForumController(IForumPostSqlDAO forumDAO, IUserSqlDAO userDAO) :
+            base(userDAO)
         {
-            forumDAO = new ForumPostSqlDAO(connectionString);
+            this.forumDAO = forumDAO;
+        }
+
+        [Route("users/{username}/dashboard")]
+        public ActionResult Dashboard(string username)
+        {
+            var conversations = forumDAO.GetAllForumPosts();
+            return View("Dashboard", conversations);
         }
 
         // GET: Forum
-        public ActionResult ForumPosts()
-        {
-            List<ForumPost> allPosts = forumDAO.GetAllFoumPosts();
-            return View("ForumPosts", allPosts);
-        }
-
-        public ActionResult Create()
+        public ActionResult Index()
         {
             return View();
-        }
-
-        [HttpPost]
-        public ActionResult Create(ForumPost post)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View("Create", post);
-            }
-            
-            return RedirectToAction("ForumPosts");
         }
     }
 }

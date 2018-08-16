@@ -22,7 +22,7 @@ namespace c_final_capstone_v2.DAL
         private static string sqlCreateForumPost = "INSERT INTO[dbo].[forum] ([username] " +
           " ,[message]) VALUES (@username, @message)";
 
-        public List<ForumPost> GetAllFoumPosts()
+        public List<ForumPost> GetAllForumPosts()
         {
             List<ForumPost> allPosts = new List<ForumPost>();
 

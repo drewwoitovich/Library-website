@@ -87,40 +87,76 @@ namespace c_final_capstone_v2.DAL
             return wasUpdated;
         }
 
-        public User UserLogin(string username, string password)
+        //public User UserLogin(string username, string password)
+        //{
+        //    User u = new User();
+
+        //    try
+        //    {
+        //        using (SqlConnection conn = new SqlConnection(connectionString))
+        //        {
+        //            conn.Open();
+
+        //            SqlCommand cmd = new SqlCommand(sqlLogin, conn);
+        //            cmd.Parameters.AddWithValue("@username", username);
+        //            cmd.Parameters.AddWithValue("@password", password);
+
+        //            SqlDataReader reader = cmd.ExecuteReader();
+
+        //            while (reader.Read())
+        //            {
+        //                u.UserId = Convert.ToInt32(reader["user_id"]);
+        //                u.Username = Convert.ToString(reader["username"]);
+        //                u.Email = Convert.ToString(reader["email"]);
+        //                u.IsAdmin = Convert.ToBoolean(reader["is_admin"]);
+        //                u.LastSearch = Convert.ToDateTime(reader["last_search"]);
+        //                u.Password = Convert.ToString(reader["password"]);
+        //                u.Newsletter = Convert.ToBoolean(reader["newsletter"]);
+
+        //            }
+        //        }
+        //        return u;
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw e;
+        //    }
+        //}
+
+        public User GetUser(string username)
         {
-            User u = new User();
+            User user = null;
 
             try
             {
+                string sql = $"SELECT TOP 1 * FROM [user] WHERE username = '{username}'";
+
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand(sqlLogin, conn);
-                    cmd.Parameters.AddWithValue("@username", username);
-                    cmd.Parameters.AddWithValue("@password", password);
-
+                    SqlCommand cmd = new SqlCommand(sql, conn);
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())
                     {
-                        u.UserId = Convert.ToInt32(reader["user_id"]);
-                        u.Username = Convert.ToString(reader["username"]);
-                        u.Email = Convert.ToString(reader["email"]);
-                        u.IsAdmin = Convert.ToBoolean(reader["is_admin"]);
-                        u.LastSearch = Convert.ToDateTime(reader["last_search"]);
-                        u.Password = Convert.ToString(reader["password"]);
-                        u.Newsletter = Convert.ToBoolean(reader["newsletter"]);
-
+                        user = new User
+                        {
+                            Username = Convert.ToString(reader["username"]),
+                            Password = Convert.ToString(reader["password"]),
+                            IsAdmin = false
+                        };
                     }
+
                 }
-                return u;
             }
-            catch (Exception e)
+            catch (SqlException ex)
             {
-                throw e;
+                throw;
             }
+
+            return user;
         }
+
     }
 }

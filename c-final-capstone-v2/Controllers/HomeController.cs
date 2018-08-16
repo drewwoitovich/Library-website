@@ -9,21 +9,20 @@ using c_final_capstone_v2.Models;
 
 namespace c_final_capstone_v2.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : MasterController
     {
         string connectionString = ConfigurationManager.ConnectionStrings["libraryConnection"].ConnectionString;
         private IBookSqlDAO bookDAO;
         private IUserSqlDAO userDAO;
+        private IForumPostSqlDAO forumDAO;
 
-        public HomeController()
+        public HomeController(IUserSqlDAO userDAO, IForumPostSqlDAO forumDAO) : base(userDAO)
         {
-            bookDAO = new BookSqlDAO(connectionString);
-            userDAO = new UserSqlDAO(connectionString);
+            this.forumDAO = forumDAO;
         }
 
         public ActionResult Index()
         {
-            //List<Book> test = bookDAO.SearchByTitle("1984");
             return View("Index");
         }
 
@@ -84,16 +83,6 @@ namespace c_final_capstone_v2.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult Login(LoginUser lu)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View("Login", lu);
-            }
-            userDAO.UserLogin(lu.Username, lu.Password);
-            return RedirectToAction("UserProfile");
-        }
 
         public ActionResult Register()
         {
@@ -109,6 +98,13 @@ namespace c_final_capstone_v2.Controllers
             }
             userDAO.CreateUser(ru);
             return RedirectToAction("UserProfile");
+        }
+
+        public ActionResult ForumPosts()
+        {
+            var messages = forumDAO.GetAllForumPosts();
+
+            return View("ForumPosts", messages);
         }
 
         public ActionResult UserProfile()

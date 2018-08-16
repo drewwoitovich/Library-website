@@ -11,6 +11,8 @@ namespace c_final_capstone_v2.DAL
     {
         bool CreateUser(RegisterUser newUser);
 
-        User UserLogin(string username, string password);
+        // User UserLogin(string username, string password);
+
+        User GetUser(string username);
     }
 }
