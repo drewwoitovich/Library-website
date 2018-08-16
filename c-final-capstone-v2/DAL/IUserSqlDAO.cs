@@ -16,5 +16,7 @@ namespace c_final_capstone_v2.DAL
         User GetUser(string username);
 
         bool CheckUsernameAvailability(string username, List<string> allUsernames);
+
+        List<List<Book>> GetReadingList(string username);
     }
 }

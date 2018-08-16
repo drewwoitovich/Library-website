@@ -102,7 +102,7 @@ namespace c_final_capstone_v2.Controllers
         public ActionResult Login()
         {
             if (base.IsAuthenticated)
-            {
+            { 
                 return RedirectToAction("Dashboard", "Forum", new { username = base.CurrentUser });
             }
 
@@ -193,6 +193,31 @@ namespace c_final_capstone_v2.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
+        }
+
+        [HttpPost]
+        public ActionResult AddToList(string username, int id)
+        {
+            if (base.IsAuthenticated)
+            {
+                return RedirectToAction("MyProfile", "User", new { username = base.CurrentUser });
+            }
+
+            var model = new LoginUser();
+            return View("Login", model);
+        }
+
+        public ActionResult MyProfile()
+        {
+            List<List<Book>> readingList = new List<List<Book>>();
+            if (base.IsAuthenticated)
+            {
+                readingList = userDAO.GetReadingList(CurrentUser);
+                return View("MyProfile", readingList);
+            }
+
+            var model = new LoginUser();
+            return View("Login", model);
         }
     }
 }

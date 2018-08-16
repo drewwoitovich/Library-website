@@ -14,6 +14,16 @@ namespace c_final_capstone_v2.DAL
         ",[email]) VALUES (@username, @password, NULL, " +
         "@newsletter, @email)";
 
+        private static string sqlAddToReadingList = "INSERT INTO[dbo].[reading_list] " +
+            "([username], [book_id], [read_status]) VALUES (@Username, @BookId " +
+           ", 0)";
+
+        private static string sqlGetReadingList = "SELECT rl.username, rl.read_status, b.title, b.authors, b.genre, b.shelf_number"
+                                                   + " FROM reading_list rl"
+                                                   + " JOIN book b ON b.book_id = rl.book_id"
+                                                   + " WHERE rl.username = @username"
+                                                   + " ORDER BY rl.read_status";
+
         private string connectionString;
         // Constructor
         public UserSqlDAO(string connectionString)
@@ -165,5 +175,74 @@ namespace c_final_capstone_v2.DAL
             return user;
         }
 
+        public bool AddToReadingList(string username, int bookId)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sqlAddToReadingList, conn);
+                    cmd.Parameters.AddWithValue("@Username", username);
+                    cmd.Parameters.AddWithValue("@BookId", bookId);
+
+                    if (cmd.ExecuteNonQuery() >= 1)
+                    {
+                        return true;
+                    }
+
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<List<Book>> GetReadingList(string username)
+        {
+            List<Book> read = new List<Book>();
+            List<Book> notRead = new List<Book>();
+            List<List<Book>> result = new List<List<Book>>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sqlGetReadingList, conn);
+                    cmd.Parameters.AddWithValue("@username", username);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Book b = new Book
+                        {
+                            Title = Convert.ToString(reader["title"]),
+                            Author = Convert.ToString(reader["authors"]),
+                            Genre = Convert.ToString(reader["genre"]),
+                            ShelfNumber = Convert.ToInt32(reader["shelf_number"]),
+                        };
+                        bool readStatus = Convert.ToBoolean(reader["read_status"]);
+                        if (readStatus)
+                        {
+                            read.Add(b);
+                        }
+                        else
+                        {
+                            notRead.Add(b);
+                        }
+                    }
+                    result.Add(read);
+                    result.Add(notRead);
+                }
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
     }
 }
