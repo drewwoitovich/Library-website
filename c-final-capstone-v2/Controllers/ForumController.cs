@@ -40,7 +40,7 @@ namespace c_final_capstone_v2.Controllers
                 return View("Create");
             }
             var model = new LoginUser();
-            return View("Login", "User", model);
+            return RedirectToAction("Login", "User", model);
         }
 
         [HttpPost]
@@ -53,7 +53,7 @@ namespace c_final_capstone_v2.Controllers
                 return RedirectToAction("Dashboard", "Forum", new { username = base.CurrentUser });
             }
             var model = new LoginUser();
-            return View("Login", "User", model);
+            return RedirectToAction("Login", "User", model);
         }
     }
 }
