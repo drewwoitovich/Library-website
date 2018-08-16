@@ -14,15 +14,6 @@ namespace c_final_capstone_v2.DAL
         ",[email]) VALUES (@username, @password, NULL, " +
         "@newsletter, @email)";
 
-        private static string sqlGetDateOfLastSearch = "SELECT last_search " +
-            "from [user] where user_id = @UserId";
-
-        private static string sqlUpdateUsersLastSearch = "UPDATE [dbo].[user] " +
-            "SET[last_search] = @DateTimeNow WHERE username = @Username";
-
-        private static string sqlLogin = "SELECT * FROM [user] WHERE username = " +
-            "@username AND password = @password";
-
         private string connectionString;
         // Constructor
         public UserSqlDAO(string connectionString)

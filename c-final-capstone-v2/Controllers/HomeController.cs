@@ -16,9 +16,11 @@ namespace c_final_capstone_v2.Controllers
         private IUserSqlDAO userDAO;
         private IForumPostSqlDAO forumDAO;
 
-        public HomeController(IUserSqlDAO userDAO, IForumPostSqlDAO forumDAO) : base(userDAO)
+        public HomeController(IBookSqlDAO bookDAO, IForumPostSqlDAO forumDAO, IUserSqlDAO userDAO) : base(userDAO)
         {
             this.forumDAO = forumDAO;
+            this.bookDAO = bookDAO;
+            this.userDAO = userDAO;
         }
 
         public ActionResult Index()

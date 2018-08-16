@@ -14,9 +14,6 @@ namespace c_final_capstone_v2.DAL
         ") VALUES (@authors, @title, @genre, @shelfNumber, " +
         "@addDate)";
 
-        private static string sqlNewBookSearch = "SELECT book_id, title, authors, genre, shelf_number, " +
-            "add_date FROM book WHERE add_date > @UserLastSearch";
-
         private static string sqlMasterSearch = "SELECT * FROM book WHERE " +
             "authors LIKE @author AND title LIKE @title AND genre LIKE @genre";
 
@@ -62,46 +59,6 @@ namespace c_final_capstone_v2.DAL
                 throw e;
             }
             return wasAdded;
-        }
-
-        // Returns a list of all books that have been added since 
-        // the last time the user searched
-        public List<Book> NewBookList(User user)
-        {
-            List<Book> listResults = new List<Book>();
-
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    conn.Open();
-
-                    SqlCommand cmd = new SqlCommand(sqlNewBookSearch, conn);
-                    //cmd.Parameters.AddWithValue("@UserLastSearch", user.LastSearch);
-
-
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    while (reader.Read())
-                    {
-                        Book book = new Book();
-
-                        book.Author = Convert.ToString(reader["authors"]);
-                        book.AddDate = Convert.ToDateTime(reader["add_date"]);
-                        book.BookId = Convert.ToInt32(reader["book_id"]);
-                        book.Genre = Convert.ToString(reader["genre"]);
-                        book.ShelfNumber = Convert.ToInt32(reader["shelf_number"]);
-                        book.Title = Convert.ToString(reader["title"]);
-
-                        listResults.Add(book);
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-            return listResults;
         }
 
         // Searches DB based on any combination of title, author or genre
