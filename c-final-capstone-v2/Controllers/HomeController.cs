@@ -78,28 +78,6 @@ namespace c_final_capstone_v2.Controllers
             return RedirectToAction("Search");
         }
 
-        public ActionResult Login()
-        {
-            return View();
-        }
-
-
-        public ActionResult Register()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Register(RegisterUser ru)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View("Login", ru);
-            }
-            userDAO.CreateUser(ru);
-            return RedirectToAction("UserProfile");
-        }
-
         public ActionResult ForumPosts()
         {
             var messages = forumDAO.GetAllForumPosts();

@@ -53,7 +53,7 @@ namespace c_final_capstone_v2.Controllers
             else
             {
                 var model = new RegisterUser();
-                return View("Login", model);
+                return View("NewUser", model);
             }
         }
 
@@ -73,13 +73,15 @@ namespace c_final_capstone_v2.Controllers
                 if (currentUser != null)
                 {
                     ViewBag.ErrorMessage = "This username is unavailable";
-                    return View("Login", model);
+                    return View("NewUser", model);
                 }
 
-                var newUser = new RegisterUser()
+                var newUser = new User
                 {
                     Username = model.Username,
                     Password = model.Password,
+                    Newsletter = model.Newsletter,
+                    Email = model.Email
                 };
 
                 // Add the user to the database
@@ -91,7 +93,7 @@ namespace c_final_capstone_v2.Controllers
             }
             else
             {
-                return View("Login", model);
+                return View("NewUser", model);
             }
         }
 

@@ -9,7 +9,7 @@ namespace c_final_capstone_v2.DAL
 {
     public interface IUserSqlDAO
     {
-        bool CreateUser(RegisterUser newUser);
+        bool CreateUser(User newUser);
 
         // User UserLogin(string username, string password);
 

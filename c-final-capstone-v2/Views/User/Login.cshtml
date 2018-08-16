@@ -1,4 +1,6 @@
-﻿@model c_final_capstone_v2.Models.LoginUser
+﻿@using c_final_capstone_v2.Models
+@model LoginUser
+
 @{
     ViewBag.Title = "Login";
 }
@@ -33,6 +35,5 @@
             </div>
         }
     </div>
-
-    @Html.Partial("_RegisterPartial", Model)
+    @Html.ActionLink("New user? Click here to register", "NewUser", "User")
 </div>

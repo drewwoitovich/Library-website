@@ -11,7 +11,7 @@ namespace c_final_capstone_v2.DAL
     {
         private static string sqlCreateUser = "INSERT INTO [dbo].[user] " +
         "([username], [password], [last_search], [is_admin], [newsletter] " +
-        ",[email]) VALUES (@username, @password, NULL, @isAdmin, " +
+        ",[email]) VALUES (@username, @password, NULL, NULL, " +
         "@newsletter, @email)";
 
         private static string sqlGetDateOfLastSearch = "SELECT last_search " +
@@ -32,7 +32,7 @@ namespace c_final_capstone_v2.DAL
 
         // Takes in a new user as an argument and adds them to
         // the users table in the connected database
-        public bool CreateUser(RegisterUser newUser)
+        public bool CreateUser(User newUser)
         {
             try
             {
@@ -43,17 +43,20 @@ namespace c_final_capstone_v2.DAL
                     SqlCommand cmd = new SqlCommand(sqlCreateUser, conn);
                     cmd.Parameters.AddWithValue("@username", newUser.Username);
                     cmd.Parameters.AddWithValue("@password", newUser.Password);
-                    cmd.Parameters.AddWithValue("@newsletter", newUser.Newsletter);
+                    cmd.Parameters.AddWithValue("@newsletter", Convert.ToInt32(newUser.Newsletter));
                     cmd.Parameters.AddWithValue("@email", newUser.Email);
 
-                    int rowsAffected = cmd.ExecuteNonQuery();
+                    if(cmd.ExecuteNonQuery() >= 1)
+                    {
+                        return true;
+                    }
 
-                    return true;
+                    return false;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                 return false;
+                throw ex;
             }
         }
 

@@ -221,17 +221,16 @@
     <Content Include="Views\Home\SearchResults.cshtml" />
     <Content Include="Views\Home\AddBook.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Home\UserProfile.cshtml" />
-    <Content Include="Views\Home\_RegisterPartial.cshtml" />
     <Content Include="Views\Home\ForumPosts.cshtml" />
     <Content Include="Views\Home\CreatePost.cshtml" />
     <Content Include="Views\Forum\Dashboard.cshtml" />
+    <Content Include="Views\User\NewUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Master\" />
-    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
