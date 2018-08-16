@@ -42,6 +42,7 @@ namespace c_final_capstone_v2.Controllers
 
         public ActionResult Search()
         {
+            ViewBag.Genres = bookDAO.GetAllGenres();
             return View();
         }
 

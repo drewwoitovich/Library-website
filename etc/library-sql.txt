@@ -34,9 +34,10 @@ CREATE TABLE reading_list (
   username varchar(32) NOT NULL,
   book_id integer NOT NULL,
   read_status bit,
-  CONSTRAINT pk_reading_list_primary_key PRIMARY KEY (username, book_id),
+
   CONSTRAINT fk_user_id_foreign_key FOREIGN KEY (username) REFERENCES [user](username),
-  CONSTRAINT fk_book_id_foreign_key FOREIGN KEY (book_id) REFERENCES book(book_id)
+  CONSTRAINT fk_book_id_foreign_key FOREIGN KEY (book_id) REFERENCES book(book_id),
+  CONSTRAINT pk_reading_list_primary_key PRIMARY KEY (username, book_id)
 );
 
 INSERT INTO [user] (username, password, is_admin, newsletter, email) VALUES ('drew', 'password1', 0, 1, 'drew@gmail.com');

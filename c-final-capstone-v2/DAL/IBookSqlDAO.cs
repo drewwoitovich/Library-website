@@ -14,5 +14,7 @@ namespace c_final_capstone_v2.DAL
         List<Book> MasterSearch(string titleInput, string authorInput, string genreInput);
 
         bool AddBook(Book newBook);
+
+        List<string> GetAllGenres();
     }
 }

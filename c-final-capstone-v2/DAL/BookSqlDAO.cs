@@ -23,6 +23,8 @@ namespace c_final_capstone_v2.DAL
         private static string sqlMasterSearchNewBook = "SELECT * FROM book WHERE " +
            "authors LIKE @author AND title LIKE @title AND genre LIKE @genre AND add_date >= @lastUserSearch";
 
+        private static string sqlGetAllGenres = @"SELECT DISTINCT genre FROM book GROUP BY genre;";
+
 
         private string connectionString;
         // Constructor
@@ -187,6 +189,31 @@ namespace c_final_capstone_v2.DAL
             return searchResults;
         }
 
+        public List<string> GetAllGenres()
+        {
+            List<string> allGenresList = new List<string>();
 
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand(sqlGetAllGenres, connection);
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        string genreToAdd = Convert.ToString(reader["genre"]);
+                        allGenresList.Add(genreToAdd);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+
+            return allGenresList;
+        }
     }
 }

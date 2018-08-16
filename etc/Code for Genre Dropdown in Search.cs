@@ -1,6 +1,6 @@
 /////In IBookSqlDAO:
 
-public List<string> GetAllGenres();
+List<string> GetAllGenres();
 
 /////In BookSqlDAO:
 private static string sqlGetAllGenres = @"SELECT DISTINCT genre FROM book GROUP BY genre;";
@@ -14,7 +14,7 @@ public List<string> GetAllGenres()
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
             connection.Open();
-            SqlCommand command = new SqlCommand(sql_GetAllGenres, connection);
+            SqlCommand command = new SqlCommand(sqlGetAllGenres, connection);
             SqlDataReader reader = command.ExecuteReader();
 
             while (reader.Read())
@@ -46,8 +46,8 @@ public ActionResult Search()
     List<SelectListItem> genreList = new List<SelectListItem>();
     foreach (string genre in ViewBag.Genres)
     {
-        SelectListItem genre = new SelectListItem { Text = genre, Value = genre };
-        genreList.Add(genre);
+        SelectListItem thisGenre = new SelectListItem { Text = genre, Value = genre };
+        genreList.Add(thisGenre);
     }
 }
 
