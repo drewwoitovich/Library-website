@@ -1,5 +1,14 @@
 ﻿@model c_final_capstone_v2.Models.Search
 
+@{
+    List<SelectListItem> genreList = new List<SelectListItem>();
+    foreach (string genre in ViewBag.Genres)
+    {
+        SelectListItem thisGenre = new SelectListItem { Text = genre, Value = genre };
+        genreList.Add(thisGenre);
+    }
+}
+
 <h2>Search for books</h2>
 @using (Html.BeginForm("SearchResults", "Home", FormMethod.Post))
 {
@@ -12,8 +21,7 @@
         @Html.TextBoxFor(m => m.AuthorSearchInput, new { placeholder = "Author", @class = "form-control" })
     </div>
     <div class="formValidationGroup form-group">
-
-        @Html.TextBoxFor(m => m.GenreSearchInput, new { placeholder = "Genre", @class = "form-control" })
+        @Html.DropDownListFor(m => m.GenreSearchInput, genreList, new { placeholder = "Genre", @class = "form-control" })
     </div>
     <div class="formValidationGroup form-group">
         @Html.LabelFor(m => m.NewSearch)
