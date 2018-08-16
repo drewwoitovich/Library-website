@@ -9,5 +9,7 @@ namespace c_final_capstone_v2.DAL
     public interface IForumPostSqlDAO
     {
         List<ForumPost> GetAllForumPosts();
+
+        bool CreatePost(ForumPost post);
     }
 }
