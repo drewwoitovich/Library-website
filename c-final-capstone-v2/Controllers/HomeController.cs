@@ -50,23 +50,6 @@ namespace c_final_capstone_v2.Controllers
             }
         }
 
-        // Get Form for adding a book
-        public ActionResult AddBook()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult AddBook(Book b)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View("AddBook", b);
-            }
-            bookDAO.AddBook(b);
-            return RedirectToAction("Search");
-        }
-
         public ActionResult ForumPosts()
         {
             var messages = forumDAO.GetAllForumPosts();

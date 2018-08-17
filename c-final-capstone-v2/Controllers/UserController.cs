@@ -11,11 +11,13 @@ namespace c_final_capstone_v2.Controllers
     public class UserController : MasterController
     {
         private readonly IUserSqlDAO userDAO;
+        private readonly IBookSqlDAO bookDAO;
 
-        public UserController(IUserSqlDAO userDAO)
+        public UserController(IUserSqlDAO userDAO, IBookSqlDAO bookDAO)
             : base(userDAO)
         {
             this.userDAO = userDAO;
+            this.bookDAO = bookDAO;
         }
 
         // ACCOUNT MANAGEMENT ACTIONS
@@ -103,7 +105,7 @@ namespace c_final_capstone_v2.Controllers
         {
             if (base.IsAuthenticated)
             { 
-                return RedirectToAction("Dashboard", "Forum", new { username = base.CurrentUser });
+                return RedirectToAction("MyProfile", "User", new { username = base.CurrentUser });
             }
 
             var model = new LoginUser();
@@ -143,7 +145,7 @@ namespace c_final_capstone_v2.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Dashboard", "Forum", new { username = user.Username });
+                    return RedirectToAction("MyProfile", "User", new { username = user.Username });
                 }
 
 
@@ -198,7 +200,12 @@ namespace c_final_capstone_v2.Controllers
         public ActionResult MyProfile()
         {
             List<List<Book>> readingList = new List<List<Book>>();
-            if (base.IsAuthenticated)
+            if (base.IsAuthenticated && base.IsAdmin)
+            {
+                readingList = userDAO.GetReadingList(CurrentUser);
+                return View("AdminProfile");
+            }
+            else if (base.IsAuthenticated)
             {
                 readingList = userDAO.GetReadingList(CurrentUser);
                 return View("MyProfile", readingList);
@@ -207,7 +214,6 @@ namespace c_final_capstone_v2.Controllers
             var model = new LoginUser();
             return View("Login", model);
         }
-
 
         [HttpGet]
         [Route("users/AddToReadingList")]
@@ -250,6 +256,27 @@ namespace c_final_capstone_v2.Controllers
             }
             var model = new LoginUser();
             return RedirectToAction("Login", "User", model);
+        }
+
+        // Get Form for adding a book
+        public ActionResult AddBook()
+        {
+            if (IsAdmin)
+            {
+                return View();
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        public ActionResult AddBook(Book b)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("AddBook", b);
+            }
+            bookDAO.AddBook(b);
+            return RedirectToAction("MyProfile", "User");
         }
     }
 }

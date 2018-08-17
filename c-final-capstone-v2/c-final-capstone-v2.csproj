@@ -226,6 +226,8 @@
     <Content Include="Views\User\NewUser.cshtml" />
     <Content Include="Views\User\MyProfile.cshtml" />
     <Content Include="Views\Forum\Create.cshtml" />
+    <Content Include="Views\User\AdminProfile.cshtml" />
+    <Content Include="Views\User\AddBook.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

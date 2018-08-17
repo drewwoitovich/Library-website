@@ -119,7 +119,7 @@ namespace c_final_capstone_v2.DAL
                         {
                             Username = Convert.ToString(reader["username"]),
                             Password = Convert.ToString(reader["password"]),
-                            IsAdmin = false
+                            IsAdmin = Convert.ToBoolean(reader["is_admin"])
                         };
                     }
 
