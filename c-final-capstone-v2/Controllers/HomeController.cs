@@ -28,20 +28,6 @@ namespace c_final_capstone_v2.Controllers
             return View("Index");
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-
         public ActionResult Search()
         {
             ViewBag.Genres = bookDAO.GetAllGenres();
