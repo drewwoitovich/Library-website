@@ -26,6 +26,15 @@ namespace c_final_capstone_v2.DAL
                                                    + " WHERE rl.username = @username"
                                                    + " ORDER BY rl.read_status";
 
+        private static string sqlMarkAsRead = "UPDATE[dbo].[reading_list] " +
+        "SET[read_status] = 1 WHERE username = @username AND book_id = @bookId";
+
+        private static string sqlDeleteFromReadingList = " DELETE * " +
+        "FROM reading_list WHERE book_id = @bookId AND username = @username";
+
+        private static string sqlCheckReadingListAvailability = " SELECT COUNT(book_id) AS quantity " +
+        "FROM reading_list WHERE book_id = @bookId AND username = @username";
+
         private string connectionString;
 
         // Constructor
@@ -165,6 +174,36 @@ namespace c_final_capstone_v2.DAL
             }
         }
 
+        public bool CheckReadingListAvailability(string username, int bookId)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sqlCheckReadingListAvailability, conn);
+                    cmd.Parameters.AddWithValue("@username", username);
+                    cmd.Parameters.AddWithValue("@bookId", bookId);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while(reader.Read())
+                    {
+                        if(Convert.ToInt32(reader["quantity"]) >= 1)
+                        {
+                            return false;
+                        }
+                    }
+                     
+                    return true;
+                }
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public List<List<Book>> GetReadingList(string username)
         {
             List<Book> read = new List<Book>();
@@ -209,40 +248,57 @@ namespace c_final_capstone_v2.DAL
             return result;
         }
 
-        //public User UserLogin(string username, string password)
-        //{
-        //    User u = new User();
+        public bool MarkAsRead(string username, int bookId)
+        {
+            
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
 
-        //    try
-        //    {
-        //        using (SqlConnection conn = new SqlConnection(connectionString))
-        //        {
-        //            conn.Open();
+                    SqlCommand cmd = new SqlCommand(sqlMarkAsRead, conn);
+                    cmd.Parameters.AddWithValue("@username", username);
+                    cmd.Parameters.AddWithValue("@bookId", bookId);
 
-        //            SqlCommand cmd = new SqlCommand(sqlLogin, conn);
-        //            cmd.Parameters.AddWithValue("@username", username);
-        //            cmd.Parameters.AddWithValue("@password", password);
+                    if (cmd.ExecuteNonQuery() >= 1)
+                    {
+                        return true;
+                    }
 
-        //            SqlDataReader reader = cmd.ExecuteReader();
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        } 
 
-        //            while (reader.Read())
-        //            {
-        //                u.UserId = Convert.ToInt32(reader["user_id"]);
-        //                u.Username = Convert.ToString(reader["username"]);
-        //                u.Email = Convert.ToString(reader["email"]);
-        //                u.IsAdmin = Convert.ToBoolean(reader["is_admin"]);
-        //                u.LastSearch = Convert.ToDateTime(reader["last_search"]);
-        //                u.Password = Convert.ToString(reader["password"]);
-        //                u.Newsletter = Convert.ToBoolean(reader["newsletter"]);
+        public bool DeleteFromReadingList(string username, int bookId)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
 
-        //            }
-        //        }
-        //        return u;
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        throw e;
-        //    }
-        //}
+                    SqlCommand cmd = new SqlCommand(sqlDeleteFromReadingList, conn);
+                    cmd.Parameters.AddWithValue("@username", username);
+                    cmd.Parameters.AddWithValue("@bookId", bookId);
+
+                    if (cmd.ExecuteNonQuery() >= 1)
+                    {
+                        return true;
+                    }
+
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

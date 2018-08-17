@@ -17,6 +17,8 @@ namespace c_final_capstone_v2.DAL
 
         bool CheckUsernameAvailability(string username, List<string> allUsernames);
 
+        bool CheckReadingListAvailability(string username, int bookId);
+
         bool AddToReadingList(string username, int bookId);
 
         List<List<Book>> GetReadingList(string username);

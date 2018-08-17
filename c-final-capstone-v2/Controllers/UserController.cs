@@ -195,18 +195,6 @@ namespace c_final_capstone_v2.Controllers
             }
         }
 
-        [HttpPost]
-        public ActionResult AddToList(string username, int id)
-        {
-            if (base.IsAuthenticated)
-            {
-                return RedirectToAction("MyProfile", "User", new { username = base.CurrentUser });
-            }
-
-            var model = new LoginUser();
-            return View("Login", model);
-        }
-
         public ActionResult MyProfile()
         {
             List<List<Book>> readingList = new List<List<Book>>();
@@ -220,17 +208,22 @@ namespace c_final_capstone_v2.Controllers
             return View("Login", model);
         }
 
-        [HttpPost]
-        public ActionResult AddToReadingList(string username, int bookId)
+
+        [HttpGet]
+        [Route("users/AddToReadingList")]
+        public ActionResult AddToReadingList(int bookId)
         {
             if (base.IsAuthenticated)
             {
-                username = CurrentUser;
-                userDAO.AddToReadingList(CurrentUser, bookId);
-                return View("MyProfile", "User");
+                if (userDAO.CheckReadingListAvailability(CurrentUser, bookId))
+                {
+                    userDAO.AddToReadingList(CurrentUser, bookId);
+                    return RedirectToAction("MyProfile", "User");
+                }
+                return RedirectToAction("MyProfile", "User");
             }
             var model = new LoginUser();
-            return RedirectToAction("Login", "User", model);
+            return View("Login", "User", model);
         }
     }
 }

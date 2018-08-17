@@ -42,7 +42,7 @@
                     @Html.DisplayFor(modelItem => item.ShelfNumber)
                 </td>
                 <td>
-                    @Html.ActionLink("Add to reading list", "AddToReadingList", "User")
+                    @Html.ActionLink("Add to reading list", "AddToReadingList", "User", new { bookId = item.BookId}, null)
                 </td>
             </tr>
         }
