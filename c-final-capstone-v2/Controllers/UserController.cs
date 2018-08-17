@@ -219,5 +219,18 @@ namespace c_final_capstone_v2.Controllers
             var model = new LoginUser();
             return View("Login", model);
         }
+
+        [HttpPost]
+        public ActionResult AddToReadingList(string username, int bookId)
+        {
+            if (base.IsAuthenticated)
+            {
+                username = CurrentUser;
+                userDAO.AddToReadingList(CurrentUser, bookId);
+                return View("MyProfile", "User");
+            }
+            var model = new LoginUser();
+            return RedirectToAction("Login", "User", model);
+        }
     }
 }
