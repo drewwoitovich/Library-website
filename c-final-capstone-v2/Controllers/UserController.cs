@@ -223,7 +223,7 @@ namespace c_final_capstone_v2.Controllers
                 return RedirectToAction("MyProfile", "User");
             }
             var model = new LoginUser();
-            return View("Login", "User", model);
+            return RedirectToAction("Login", "User", model);
         }
     }
 }

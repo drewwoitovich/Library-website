@@ -4,84 +4,90 @@
     List<Book> read = Model[0];
     List<Book> notRead = Model[1];
 }
-<table class="table table-striped table-hover">
-    <tr>
-        <th>
-            Title
-        </th>
-        <th>
-            Author
-        </th>
-        <th>
-            Genre
-        </th>
-        <th>
-            Shelf Number
-        </th>
-        <th>
-            
-        </th>
-    </tr>
-
-    @foreach (var item in notRead)
-    {
+<div>
+    <h3>Books to Read</h3>
+    <table class="table table-striped table-hover">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Author)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Genre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShelfNumber)
-            </td>
-            <td>
-                Add To(Placeholder)
-            </td>
+            <th>
+                Title
+            </th>
+            <th>
+                Author
+            </th>
+            <th>
+                Genre
+            </th>
+            <th>
+                Shelf Number
+            </th>
+            <th>
+
+            </th>
         </tr>
-    }
-</table>
-<table class="table table-striped table-hover">
-    <tr>
-        <th>
-            Title
-        </th>
-        <th>
-            Author
-        </th>
-        <th>
-            Genre
-        </th>
-        <th>
-            Shelf Number
-        </th>
-        <th>
 
-        </th>
-    </tr>
+        @foreach (var item in notRead)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Genre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShelfNumber)
+                </td>
+                <td>
+                    Add To(Placeholder)
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<div>
+    <h3>Read Books</h3>
+    <table class="table table-striped table-hover">
 
-    @foreach (var item in read)
-    {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Author)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Genre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShelfNumber)
-            </td>
-            <td>
-                Delete(Placeholder)
-            </td>
-        </tr>
-    }
-</table>
+            <th>
+                Title
+            </th>
+            <th>
+                Author
+            </th>
+            <th>
+                Genre
+            </th>
+            <th>
+                Shelf Number
+            </th>
+            <th>
 
+            </th>
+        </tr>
+
+        @foreach (var item in read)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Genre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShelfNumber)
+                </td>
+                <td>
+                    Delete(Placeholder)
+                </td>
+            </tr>
+        }
+    </table>
+</div>
