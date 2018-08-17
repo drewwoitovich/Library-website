@@ -225,5 +225,31 @@ namespace c_final_capstone_v2.Controllers
             var model = new LoginUser();
             return RedirectToAction("Login", "User", model);
         }
+
+        [HttpGet]
+        [Route("users/AddToReadingList")]
+        public ActionResult MarkAsRead(int bookId)
+        {
+            if (base.IsAuthenticated)
+            {
+                userDAO.MarkAsRead(CurrentUser, bookId);
+                return RedirectToAction("MyProfile", "User");
+            }
+            var model = new LoginUser();
+            return RedirectToAction("Login", "User", model);
+        }
+
+        [HttpGet]
+        [Route("users/DeleteFromReadingList")]
+        public ActionResult DeleteFromReadingList(int bookId)
+        {
+            if (base.IsAuthenticated)
+            {
+                userDAO.DeleteFromReadingList(CurrentUser, bookId);
+                return RedirectToAction("MyProfile", "User");
+            }
+            var model = new LoginUser();
+            return RedirectToAction("Login", "User", model);
+        }
     }
 }

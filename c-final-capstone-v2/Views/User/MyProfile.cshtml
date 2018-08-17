@@ -21,7 +21,6 @@
                 Shelf Number
             </th>
             <th>
-
             </th>
         </tr>
 
@@ -41,7 +40,7 @@
                     @Html.DisplayFor(modelItem => item.ShelfNumber)
                 </td>
                 <td>
-                    Add To(Placeholder)
+                    @Html.ActionLink("Mark as Read", "MarkAsRead", "User", new { bookId = item.BookId }, new { @class = "btn btn-primary btn-xs", @type = "button" })
                 </td>
             </tr>
         }
@@ -85,7 +84,7 @@
                     @Html.DisplayFor(modelItem => item.ShelfNumber)
                 </td>
                 <td>
-                    Delete(Placeholder)
+                    @Html.ActionLink("Delete", "DeleteFromReadingList", "User", new { bookId = item.BookId }, new { @class = "btn btn-danger btn-xs", @type = "button" })
                 </td>
             </tr>
         }

@@ -20,7 +20,7 @@ namespace c_final_capstone_v2.DAL
         private static string sqlAddToReadingList = "INSERT INTO [dbo].[reading_list] " +
             "([username], [book_id], [read_status]) VALUES (@username, @bookId, 0)";
 
-        private static string sqlGetReadingList = "SELECT rl.username, rl.read_status, b.title, b.authors, b.genre, b.shelf_number"
+        private static string sqlGetReadingList = "SELECT rl.username, rl.read_status, b.title, b.authors, b.genre, b.shelf_number, b.book_id"
                                                    + " FROM reading_list rl"
                                                    + " JOIN book b ON b.book_id = rl.book_id"
                                                    + " WHERE rl.username = @username"
@@ -29,7 +29,7 @@ namespace c_final_capstone_v2.DAL
         private static string sqlMarkAsRead = "UPDATE[dbo].[reading_list] " +
         "SET[read_status] = 1 WHERE username = @username AND book_id = @bookId";
 
-        private static string sqlDeleteFromReadingList = " DELETE * " +
+        private static string sqlDeleteFromReadingList = " DELETE " +
         "FROM reading_list WHERE book_id = @bookId AND username = @username";
 
         private static string sqlCheckReadingListAvailability = " SELECT COUNT(book_id) AS quantity " +
@@ -226,6 +226,7 @@ namespace c_final_capstone_v2.DAL
                             Author = Convert.ToString(reader["authors"]),
                             Genre = Convert.ToString(reader["genre"]),
                             ShelfNumber = Convert.ToInt32(reader["shelf_number"]),
+                            BookId = Convert.ToInt32(reader["book_id"])
                         };
                         bool readStatus = Convert.ToBoolean(reader["read_status"]);
                         if (readStatus)

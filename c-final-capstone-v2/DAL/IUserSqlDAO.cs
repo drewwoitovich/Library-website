@@ -22,5 +22,9 @@ namespace c_final_capstone_v2.DAL
         bool AddToReadingList(string username, int bookId);
 
         List<List<Book>> GetReadingList(string username);
+
+        bool MarkAsRead(string username, int bookId);
+
+        bool DeleteFromReadingList(string username, int bookId);
     }
 }
