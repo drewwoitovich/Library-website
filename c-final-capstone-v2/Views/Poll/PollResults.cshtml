@@ -1,0 +1,45 @@
+﻿@model IEnumerable<c_final_capstone_v2.Models.PollResults>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FavoriteBook)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FavoriteAuthors)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WeekOf)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FavoriteBook)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FavoriteAuthors)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WeekOf)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

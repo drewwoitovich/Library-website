@@ -1,3 +1,4 @@
+--DROP TABLE poll;
 --DROP TABLE reading_list;
 --DROP TABLE book;
 --DROP TABLE forum;
@@ -35,13 +36,26 @@ CREATE TABLE reading_list (
   book_id integer NOT NULL,
   read_status bit,
 
-  CONSTRAINT fk_user_id_foreign_key FOREIGN KEY (username) REFERENCES [user](username),
+  CONSTRAINT fk_username_foreign_key FOREIGN KEY (username) REFERENCES [user](username),
   CONSTRAINT fk_book_id_foreign_key FOREIGN KEY (book_id) REFERENCES book(book_id),
   CONSTRAINT pk_reading_list_primary_key PRIMARY KEY (username, book_id)
 );
 
+CREATE TABLE poll (
+  username varchar(32) NOT NULL,
+  book_id_for_favorite_title integer,
+  book_id_for_favorite_authors integer,
+  week_of date NOT NULL,
+  
+  CONSTRAINT fk_book_id_for_favorite_title FOREIGN KEY (book_id_for_favorite_title) REFERENCES book(book_id),
+  CONSTRAINT fk_book_id_for_favorite_authors FOREIGN KEY (book_id_for_favorite_authors) REFERENCES book(book_id),
+  CONSTRAINT fk_user_username FOREIGN KEY (username) REFERENCES [user](username),
+  CONSTRAINT pk_user_username_poll_week_of PRIMARY KEY (username, week_of)
+);
+
 INSERT INTO [user] (username, password, is_admin, newsletter, email) VALUES ('drew', 'password1', 0, 1, 'drew@gmail.com');
 INSERT INTO [user] (username, password, is_admin, newsletter, email) VALUES ('bradon', 'password2', 1, 0, 'bradon@gmail.com');
+INSERT INTO [user] (username, password, is_admin, newsletter, email) VALUES ('alyson', 'password3', 1, 1, 'alyson@gmail.com');
 
 SET IDENTITY_INSERT forum ON;
 INSERT INTO forum (post_id, username, message) VALUES (1,'drew','Hello World!');
@@ -56,3 +70,10 @@ SET IDENTITY_INSERT book OFF;
 INSERT INTO reading_list (username, book_id, read_status) VALUES ('drew', 2, 1);
 INSERT INTO reading_list (username, book_id, read_status) VALUES ('drew', 3, 0);
 INSERT INTO reading_list (username, book_id, read_status) VALUES ('bradon', 1, 0);
+
+INSERT INTO poll (username, book_id_for_favorite_title, book_id_for_favorite_authors, week_of) VALUES ('alyson', 1, 1, '2018-08-13');
+INSERT INTO poll (username, book_id_for_favorite_title, book_id_for_favorite_authors, week_of) VALUES ('drew', 2, 1, '2018-08-13');
+INSERT INTO poll (username, book_id_for_favorite_title, book_id_for_favorite_authors, week_of) VALUES ('bradon', 3, 2, '2018-08-13');
+INSERT INTO poll (username, book_id_for_favorite_title, book_id_for_favorite_authors, week_of) VALUES ('drew', 1, 2, '2018-08-20');
+INSERT INTO poll (username, book_id_for_favorite_title, book_id_for_favorite_authors, week_of) VALUES ('bradon', 2, 3, '2018-08-20');
+INSERT INTO poll (username, book_id_for_favorite_title, book_id_for_favorite_authors, week_of) VALUES ('alyson', 3, 3, '2018-08-20');

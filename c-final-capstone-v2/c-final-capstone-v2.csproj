@@ -162,12 +162,15 @@
     <Compile Include="Controllers\ForumController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MasterController.cs" />
+    <Compile Include="Controllers\PollController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DAL\BookSqlDAO.cs" />
     <Compile Include="DAL\ForumPostSqlDAO.cs" />
     <Compile Include="DAL\IBookSqlDAO.cs" />
     <Compile Include="DAL\IForumPostSqlDAO.cs" />
+    <Compile Include="DAL\IPollSqlDAO.cs" />
     <Compile Include="DAL\IUserSqlDAO.cs" />
+    <Compile Include="DAL\PollSqlDAO.cs" />
     <Compile Include="DAL\UserSqlDAO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -175,6 +178,8 @@
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\ForumPost.cs" />
     <Compile Include="Models\LoginUser.cs" />
+    <Compile Include="Models\Poll.cs" />
+    <Compile Include="Models\PollResults.cs" />
     <Compile Include="Models\RegisterUser.cs" />
     <Compile Include="Models\Search.cs" />
     <Compile Include="Models\User.cs" />
@@ -225,6 +230,9 @@
     <Content Include="Views\Forum\Create.cshtml" />
     <Content Include="Views\User\AdminProfile.cshtml" />
     <Content Include="Views\User\AddBook.cshtml" />
+    <Content Include="Views\Poll\PollView.cshtml" />
+    <Content Include="Views\Poll\CompletePoll.cshtml" />
+    <Content Include="Views\Poll\PollResults.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
