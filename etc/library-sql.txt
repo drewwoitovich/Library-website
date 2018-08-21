@@ -7,7 +7,7 @@
 CREATE TABLE [user] (
   username varchar(32) NOT NULL,
   password nvarchar(32) NOT NULL,
-  is_admin bit,
+  is_admin bit NOT NULL,
   newsletter bit,
   email nvarchar(max),
   CONSTRAINT pk_username_primary_key PRIMARY KEY (username)
