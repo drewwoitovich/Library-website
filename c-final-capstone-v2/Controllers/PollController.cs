@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using c_final_capstone_v2.DAL;
+using c_final_capstone_v2.Models;
 
 namespace c_final_capstone_v2.Controllers
 {
@@ -21,13 +22,25 @@ namespace c_final_capstone_v2.Controllers
         [HttpGet]
         public ActionResult Poll()
         {
-            return View();
+            if (base.IsAuthenticated)
+            {
+                return View("PollView");
+            }
+            var model = new LoginUser();
+            return RedirectToAction("Login", "User", model);
         }
 
         [HttpPost]
-        public ActionResult Poll()
+        public ActionResult Poll(Poll poll)
         {
-
+            if (base.IsAuthenticated)
+            {
+                poll.Username = CurrentUser;
+                pollDAO.CreatePoll(poll);
+                return RedirectToAction("PollView", "Poll", new { username = base.CurrentUser });
+            }
+            var model = new LoginUser();
+            return RedirectToAction("Login", "User", model);
         }
     }
 }
