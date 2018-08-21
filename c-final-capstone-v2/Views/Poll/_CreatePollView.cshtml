@@ -1,26 +1,16 @@
-﻿@model c_final_capstone_v2.Models.Poll
+﻿@model c_final_capstone_v2.Models.CreatePollModel
 
 @{
-    ViewBag.Title = "Poll";
+    ViewBag.Title = "Weekly Poll";
 }
 
-<h2>Poll</h2>
+<h2>Complete Weekly Poll</h2>
 
 
-@using (Html.BeginForm("CreatePoll", "Poll", FormMethod.Post)) 
+@using (Html.BeginForm("Poll", "Poll", FormMethod.Post)) 
 {
-    @Html.AntiForgeryToken()
-    
     <div class="form-horizontal">
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.WeekOf, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.WeekOf, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.WeekOf, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.FavoriteBook, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -40,15 +30,11 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Submit" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

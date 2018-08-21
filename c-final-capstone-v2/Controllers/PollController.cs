@@ -19,25 +19,28 @@ namespace c_final_capstone_v2.Controllers
             this.userDAO = userDAO;
         }
 
-        [HttpGet]
-        public ActionResult CreatePoll()
+        public ActionResult Poll()
         {
-            if (base.IsAdmin)
+            var pollView = new PollViewModel();
+            pollView.CreatePoll = new CreatePollModel();
+            pollView.PollResults = pollDAO.GetPollResults();
+
+            if (base.IsAuthenticated)
             {
-                return View("CreatePoll");
+                return View("PollView", pollView);
             }
             var model = new LoginUser();
             return RedirectToAction("Login", "User", model);
         }
 
         [HttpPost]
-        public ActionResult CreatePoll(Poll poll)
+        public ActionResult Poll(CreatePollModel poll)
         {
             if (base.IsAuthenticated)
             {
                 poll.Username = CurrentUser;
                 pollDAO.CreatePoll(poll);
-                return RedirectToAction("PollView", "Poll", new { username = base.CurrentUser });
+                return RedirectToAction("Poll", "Poll", new { username = base.CurrentUser });
             }
             var model = new LoginUser();
             return RedirectToAction("Login", "User", model);

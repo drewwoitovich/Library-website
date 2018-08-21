@@ -11,7 +11,7 @@ namespace c_final_capstone_v2.DAL
     {
         Dictionary<string, int> ListAllBooks();
         Dictionary<string, int> ListAllAuthors();
-        List<PollResults> GetPollResults();
-        bool CreatePoll(Poll poll);
+        List<PollResultsModel> GetPollResults();
+        bool CreatePoll(CreatePollModel poll);
     }
 }

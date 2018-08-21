@@ -14,7 +14,7 @@ namespace c_final_capstone_v2.DAL
         private static string sqlListAllAuthors = @"SELECT DISTINCT authors, book_id FROM book ORDER BY authors;";
         private static string sqlGetPollResults = @"SELECT week_of, (SELECT b.title FROM book b WHERE b.book_id = p.book_id_for_favorite_title) AS favorite_books, (SELECT b.authors FROM book b WHERE b.book_id = p.book_id_for_favorite_authors) AS favorite_authors
                                                     FROM poll p
-                                                    ORDER BY week_of DESC;";
+                                                    ORDER BY poll_id DESC;";
         private static string sqlCreatePoll = @"INSERT INTO poll (username, book_id_for_favorite_title, book_id_for_favorite_authors, week_of) VALUES (@username, @favoriteBook, @favoriteAuthors, @weekOf);";
 
         public PollSqlDAO(string connectionString)
@@ -72,9 +72,9 @@ namespace c_final_capstone_v2.DAL
             return allAuthors;
         }
 
-        public List<PollResults> GetPollResults()
+        public List<PollResultsModel> GetPollResults()
         {
-            List<PollResults> allPolls = new List<PollResults>();
+            List<PollResultsModel> allPolls = new List<PollResultsModel>();
 
             try
             {
@@ -85,11 +85,11 @@ namespace c_final_capstone_v2.DAL
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        PollResults pollResult = new PollResults();
+                        PollResultsModel pollResult = new PollResultsModel();
 
-                        pollResult.Username = Convert.ToString(reader["username"]);
-                        pollResult.FavoriteBook = Convert.ToInt32(reader["favorite_books"]);
-                        pollResult.FavoriteAuthors = Convert.ToInt32(reader["favorite_authors"]);
+                        //pollResult.Username = Convert.ToString(reader["username"]);
+                        pollResult.FavoriteBook = Convert.ToString(reader["favorite_books"]);
+                        pollResult.FavoriteAuthors = Convert.ToString(reader["favorite_authors"]);
                         pollResult.WeekOf = Convert.ToDateTime(reader["week_of"]);
 
                         allPolls.Add(pollResult);
@@ -104,7 +104,7 @@ namespace c_final_capstone_v2.DAL
             return allPolls;
         }
 
-        public bool CreatePoll(Poll poll)
+        public bool CreatePoll(CreatePollModel poll)
         {
             bool wasAdded = false;
 

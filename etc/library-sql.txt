@@ -10,15 +10,15 @@ CREATE TABLE [user] (
   is_admin bit NOT NULL,
   newsletter bit,
   email nvarchar(max),
-  CONSTRAINT pk_username_primary_key PRIMARY KEY (username)
+  CONSTRAINT pk_user_username PRIMARY KEY (username)
 );
 
 CREATE TABLE forum (
   post_id integer identity NOT NULL,
   username varchar(32) NOT NULL,
   message varchar(max) NOT NULL,
-  CONSTRAINT pk_forum_primary_key PRIMARY KEY (post_id),
-  CONSTRAINT fk_username_foreign_key FOREIGN KEY (username) REFERENCES [user](username)
+  CONSTRAINT fk_forum_username FOREIGN KEY (username) REFERENCES [user](username),
+  CONSTRAINT pk_forum_post_id PRIMARY KEY (post_id)
   );
 
 CREATE TABLE book (
@@ -28,29 +28,28 @@ CREATE TABLE book (
   genre varchar(max) NOT NULL,
   shelf_number integer NOT NULL,
   add_date datetime NOT NULL,
-  CONSTRAINT pk_book_primary_key PRIMARY KEY (book_id)
+  CONSTRAINT pk_book_book_id PRIMARY KEY (book_id)
   );
 
 CREATE TABLE reading_list (
   username varchar(32) NOT NULL,
   book_id integer NOT NULL,
   read_status bit,
-
-  CONSTRAINT fk_username_foreign_key FOREIGN KEY (username) REFERENCES [user](username),
-  CONSTRAINT fk_book_id_foreign_key FOREIGN KEY (book_id) REFERENCES book(book_id),
-  CONSTRAINT pk_reading_list_primary_key PRIMARY KEY (username, book_id)
+  CONSTRAINT fk_reading_list_username FOREIGN KEY (username) REFERENCES [user](username),
+  CONSTRAINT fk_reading_list_book_id FOREIGN KEY (book_id) REFERENCES book(book_id),
+  CONSTRAINT pk_reading_list_username_book_id PRIMARY KEY (username, book_id)
 );
 
 CREATE TABLE poll (
+  poll_id integer identity NOT NULL,
   username varchar(32) NOT NULL,
   book_id_for_favorite_title integer,
   book_id_for_favorite_authors integer,
   week_of date NOT NULL,
-  
-  CONSTRAINT fk_book_id_for_favorite_title FOREIGN KEY (book_id_for_favorite_title) REFERENCES book(book_id),
-  CONSTRAINT fk_book_id_for_favorite_authors FOREIGN KEY (book_id_for_favorite_authors) REFERENCES book(book_id),
-  CONSTRAINT fk_user_username FOREIGN KEY (username) REFERENCES [user](username),
-  CONSTRAINT pk_user_username_poll_week_of PRIMARY KEY (username, week_of)
+  CONSTRAINT fk_poll_book_id_for_favorite_title FOREIGN KEY (book_id_for_favorite_title) REFERENCES book(book_id),
+  CONSTRAINT fk_poll_book_id_for_favorite_authors FOREIGN KEY (book_id_for_favorite_authors) REFERENCES book(book_id),
+  CONSTRAINT fk_poll_username FOREIGN KEY (username) REFERENCES [user](username),
+  CONSTRAINT pk_poll_poll_id PRIMARY KEY (poll_id)
 );
 
 INSERT INTO [user] (username, password, is_admin, newsletter, email) VALUES ('drew', 'password1', 0, 1, 'drew@gmail.com');
@@ -71,9 +70,11 @@ INSERT INTO reading_list (username, book_id, read_status) VALUES ('drew', 2, 1);
 INSERT INTO reading_list (username, book_id, read_status) VALUES ('drew', 3, 0);
 INSERT INTO reading_list (username, book_id, read_status) VALUES ('bradon', 1, 0);
 
-INSERT INTO poll (username, book_id_for_favorite_title, book_id_for_favorite_authors, week_of) VALUES ('alyson', 1, 1, '2018-08-13');
-INSERT INTO poll (username, book_id_for_favorite_title, book_id_for_favorite_authors, week_of) VALUES ('drew', 2, 1, '2018-08-13');
-INSERT INTO poll (username, book_id_for_favorite_title, book_id_for_favorite_authors, week_of) VALUES ('bradon', 3, 2, '2018-08-13');
-INSERT INTO poll (username, book_id_for_favorite_title, book_id_for_favorite_authors, week_of) VALUES ('drew', 1, 2, '2018-08-20');
-INSERT INTO poll (username, book_id_for_favorite_title, book_id_for_favorite_authors, week_of) VALUES ('bradon', 2, 3, '2018-08-20');
-INSERT INTO poll (username, book_id_for_favorite_title, book_id_for_favorite_authors, week_of) VALUES ('alyson', 3, 3, '2018-08-20');
+SET IDENTITY_INSERT poll ON;
+INSERT INTO poll (poll_id, username, book_id_for_favorite_title, book_id_for_favorite_authors, week_of) VALUES (1, 'alyson', 1, 1, '2018-08-13');
+INSERT INTO poll (poll_id, username, book_id_for_favorite_title, book_id_for_favorite_authors, week_of) VALUES (2, 'drew', 2, 1, '2018-08-13');
+INSERT INTO poll (poll_id, username, book_id_for_favorite_title, book_id_for_favorite_authors, week_of) VALUES (3, 'bradon', 3, 2, '2018-08-13');
+INSERT INTO poll (poll_id, username, book_id_for_favorite_title, book_id_for_favorite_authors, week_of) VALUES (4, 'drew', 1, 2, '2018-08-20');
+INSERT INTO poll (poll_id, username, book_id_for_favorite_title, book_id_for_favorite_authors, week_of) VALUES (5, 'bradon', 2, 3, '2018-08-20');
+INSERT INTO poll (poll_id, username, book_id_for_favorite_title, book_id_for_favorite_authors, week_of) VALUES (6, 'alyson', 3, 3, '2018-08-20');
+SET IDENTITY_INSERT poll OFF;

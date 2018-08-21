@@ -6,17 +6,17 @@ using System.Web;
 
 namespace c_final_capstone_v2.Models
 {
-    public class Poll
+    public class PollResultsModel
     {
-        public DateTime WeekOf { get; set; }
-
-        [Required]
         public string Username { get; set; }
 
-        [Required]
+        [Display(Name = "Favorite Book")]
         public string FavoriteBook { get; set; }
 
-        [Required]
+        [Display(Name = "Favorite Authors")]
         public string FavoriteAuthors { get; set; }
+
+        [Display(Name = "Week Of")]
+        public DateTime WeekOf { get; set; }
     }
 }

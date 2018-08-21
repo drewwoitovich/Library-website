@@ -1,0 +1,8 @@
+﻿@model c_final_capstone_v2.Models.PollViewModel
+
+@Html.Partial("_CreatePollView", Model.CreatePoll)
+@Html.Partial("_PollResultsView", Model.PollResults)
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

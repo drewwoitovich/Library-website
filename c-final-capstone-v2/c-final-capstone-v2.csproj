@@ -178,8 +178,9 @@
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\ForumPost.cs" />
     <Compile Include="Models\LoginUser.cs" />
-    <Compile Include="Models\Poll.cs" />
-    <Compile Include="Models\PollResults.cs" />
+    <Compile Include="Models\CreatePollModel.cs" />
+    <Compile Include="Models\PollResultsModel.cs" />
+    <Compile Include="Models\PollViewModel.cs" />
     <Compile Include="Models\RegisterUser.cs" />
     <Compile Include="Models\Search.cs" />
     <Compile Include="Models\User.cs" />
@@ -230,9 +231,9 @@
     <Content Include="Views\Forum\Create.cshtml" />
     <Content Include="Views\User\AdminProfile.cshtml" />
     <Content Include="Views\User\AddBook.cshtml" />
-    <Content Include="Views\Poll\CreatePoll.cshtml" />
-    <Content Include="Views\Poll\CompletePoll.cshtml" />
-    <Content Include="Views\Poll\PollResults.cshtml" />
+    <Content Include="Views\Poll\_CreatePollView.cshtml" />
+    <Content Include="Views\Poll\PollView.cshtml" />
+    <Content Include="Views\Poll\_PollResultsView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
