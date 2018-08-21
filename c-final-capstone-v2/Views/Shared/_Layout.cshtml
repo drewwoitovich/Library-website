@@ -25,8 +25,15 @@
                     <li>@Html.ActionLink("Weekly Poll", "Poll", "Poll")</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li>@Html.ActionLink("My Profile", "MyProfile", "User")</li>
-                    <li>@Html.ActionLink("Login", "Login", "User")</li>
+                    @if ((string)Session["Library_Username"] != null)
+                    {
+                        <li>@Html.ActionLink("My Profile", "MyProfile", "User")</li>
+                        <li>@Html.ActionLink("Logout", "Logout", "User")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Login", "Login", "User")</li>
+                    }
                 </ul>
             </div>
         </div>

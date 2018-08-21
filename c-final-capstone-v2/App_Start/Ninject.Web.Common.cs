@@ -65,7 +65,7 @@ namespace c_final_capstone_v2.App_Start
             kernel.Bind<IUserSqlDAO>().To<UserSqlDAO>().WithConstructorArgument("connectionString", ConfigurationManager.ConnectionStrings["libraryConnection"].ConnectionString);
             kernel.Bind<IForumPostSqlDAO>().To<ForumPostSqlDAO>().WithConstructorArgument("connectionString", ConfigurationManager.ConnectionStrings["libraryConnection"].ConnectionString);
             kernel.Bind<IBookSqlDAO>().To<BookSqlDAO>().WithConstructorArgument("connectionString", ConfigurationManager.ConnectionStrings["libraryConnection"].ConnectionString);
-
+            kernel.Bind<IPollSqlDAO>().To<PollSqlDAO>().WithConstructorArgument("connectionString", ConfigurationManager.ConnectionStrings["libraryConnection"].ConnectionString);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace c_final_capstone_v2.DAL
     {
         private static string sqlCreateUser = "INSERT INTO [dbo].[user] " +
         "([username], [password], [is_admin], [newsletter], [email]) " +
-        "VALUES (@username, @password, NULL, @newsletter, @email)";
+        "VALUES (@username, @password, 0, @newsletter, @email)";
 
         private static string sqlGetUserNames = @"SELECT username FROM [user];";
 
