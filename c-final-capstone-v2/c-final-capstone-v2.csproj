@@ -230,7 +230,7 @@
     <Content Include="Views\Forum\Create.cshtml" />
     <Content Include="Views\User\AdminProfile.cshtml" />
     <Content Include="Views\User\AddBook.cshtml" />
-    <Content Include="Views\Poll\PollView.cshtml" />
+    <Content Include="Views\Poll\CreatePoll.cshtml" />
     <Content Include="Views\Poll\CompletePoll.cshtml" />
     <Content Include="Views\Poll\PollResults.cshtml" />
   </ItemGroup>

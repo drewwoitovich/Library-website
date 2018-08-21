@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using c_final_capstone_v2.DAL;
 using c_final_capstone_v2.Models;
+using System.Web.Routing;
 
 namespace c_final_capstone_v2.Controllers
 {
@@ -75,8 +76,10 @@ namespace c_final_capstone_v2.Controllers
 
         public void LogUserOut()
         {
-            Session.Abandon();
-            Response.Cookies.Add(new HttpCookie("ASP.NET_SessionId", ""));
+            Environment.Exit(0);
+            //Session[IsAdminKey] = null;
+            //Session[UsernameKey] = null;
+            //Response.Cookies.Add(new HttpCookie("ASP.NET_SessionId", ""));
         }
 
         [ChildActionOnly]

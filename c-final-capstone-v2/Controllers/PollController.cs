@@ -20,18 +20,18 @@ namespace c_final_capstone_v2.Controllers
         }
 
         [HttpGet]
-        public ActionResult Poll()
+        public ActionResult CreatePoll()
         {
-            if (base.IsAuthenticated)
+            if (base.IsAdmin)
             {
-                return View("PollView");
+                return View("CreatePoll");
             }
             var model = new LoginUser();
             return RedirectToAction("Login", "User", model);
         }
 
         [HttpPost]
-        public ActionResult Poll(Poll poll)
+        public ActionResult CreatePoll(Poll poll)
         {
             if (base.IsAuthenticated)
             {

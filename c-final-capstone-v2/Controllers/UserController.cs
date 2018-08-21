@@ -104,7 +104,7 @@ namespace c_final_capstone_v2.Controllers
         public ActionResult Login()
         {
             if (base.IsAuthenticated)
-            { 
+            {
                 return RedirectToAction("MyProfile", "User", new { username = base.CurrentUser });
             }
 
@@ -163,7 +163,6 @@ namespace c_final_capstone_v2.Controllers
         public ActionResult Logout()
         {
             base.LogUserOut();
-
             return RedirectToAction("Index", "Home");
         }
 
