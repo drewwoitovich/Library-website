@@ -7,16 +7,24 @@ DEMO
 	Users can vote for their favorite books and authors.
 
 2) Identify the users
-	- Anonymous users
-	- Registered users
-	- Admin users
+	- Anonymous users - Can search books and view Forum
+	- Registered users - Can search books, add books to a reading list, manage their reading list, sign up for the newsletter, view and post to forum and weekly poll, and logout
+	- Admin users - Can search books, sign up for the newsletter, view and post to forum and weekly poll, and logout
 
 3) Illustrate a user story through the demo
+	- Users can search for books by title, author, genre, and/or date added to database
+	- User login and session data
+	- Registered users can create a reading list, and keep track of what they have already read
+	- Registered users can participate in a forum
+	- Admin can add a new book to the database
 
 4) Detail additional features beyond requirements
+	- Registered users can participate in a weekly poll
+	- Registered users can sign up to receive a Newsletter
+	- Users can logout
 
 
-Not Logged In:
+Not Logged in (Anonymous user):
 	- Can Search
 		- title: 
 		  author: 
@@ -32,7 +40,7 @@ Not Logged In:
 		  newsletter: false
 	- Logout
 	
-Logged in as Regular User:
+Logged in as Regular user:
 	- Login
 	- Search
 		- title: 
@@ -44,7 +52,7 @@ Logged in as Regular User:
 	- Delete from read books
 	- Logout
 
-Logged in as Admin:
+Logged in as admin:
 	- Login
 	- Add a book
 		- title: Demo Book
@@ -52,7 +60,7 @@ Logged in as Admin:
 		  genre: Demo
 		  shelf: 1
 	- Search for added book
-		- title: Demo Book
+		- title: Demo
 	- Add Poll vote
 		- book: 20 Years After (57)
 		  author: Afton Nelsen (484)
