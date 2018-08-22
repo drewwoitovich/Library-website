@@ -21,7 +21,7 @@ namespace c_final_capstone_v2.Models
         public string Genre { get; set; }
 
         [Required]
-        [Display(Name = "Shelf Number")]
+        [Display(Name = "Shelf")]
         public int ShelfNumber { get; set; }
 
         [Display(Name = "Add Date")]

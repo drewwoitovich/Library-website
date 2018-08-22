@@ -12,7 +12,7 @@
     }
 }
 
-<h2>Search for books</h2>
+<h2 class="title">Search for books</h2>
 @using (Html.BeginForm("SearchResults", "Home", FormMethod.Post))
 {
     <div class="formValidationGroup form-group">
@@ -32,7 +32,7 @@
     </div>
     @Html.TextBoxFor(model => model.DateTimeSearchInput,
         new { type = "date" })
-    <div class="">
+    <div class="searchButton">
         <button class="formSubmitButton btn btn-default">Search</button>
     </div>
 }
