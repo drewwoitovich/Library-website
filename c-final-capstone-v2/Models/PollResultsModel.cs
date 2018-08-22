@@ -10,10 +10,10 @@ namespace c_final_capstone_v2.Models
     {
         public string Username { get; set; }
 
-        [Display(Name = "Favorite Book")]
+        [Display(Name = "Top Voted Book")]
         public string FavoriteBook { get; set; }
 
-        [Display(Name = "Favorite Authors")]
+        [Display(Name = "Top Voted Authors")]
         public string FavoriteAuthors { get; set; }
 
         [Display(Name = "Week Of")]
