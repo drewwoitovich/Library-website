@@ -12,10 +12,17 @@ namespace c_final_capstone_v2.DAL
         private string connectionString;
         private static string sqlListAllBooks = @"SELECT DISTINCT (title + ' By: ' + authors) AS title_and_authors, book_id FROM book ORDER BY title_and_authors;";
         private static string sqlListAllAuthors = @"SELECT DISTINCT authors, book_id FROM book ORDER BY authors;";
-        private static string sqlGetPollResults = @"SELECT week_of, (SELECT b.title FROM book b WHERE b.book_id = p.book_id_for_favorite_title) AS favorite_books, (SELECT b.authors FROM book b WHERE b.book_id = p.book_id_for_favorite_authors) AS favorite_authors
-                                                    FROM poll p
-                                                    ORDER BY poll_id DESC;";
+        private static string sqlGetPollResults = @"SELECT TOP 1 week_of, (SELECT TOP 1 b.authors FROM poll p " +
+        "JOIN book b ON p.book_id_for_favorite_authors = b.book_id " +
+        "GROUP BY week_of, book_id_for_favorite_authors, b.authors " +
+        "ORDER BY week_of DESC, count(*) DESC) AS favorite_authors, " +
+        "(SELECT TOP 1 b.title FROM poll p JOIN book b ON p.book_id_for_favorite_title = b.book_id " +
+        "GROUP BY week_of, book_id_for_favorite_title, b.title " +
+        "ORDER BY week_of DESC, count(*) DESC) AS favorite_book " +
+        "FROM poll p ORDER BY week_of DESC;";
         private static string sqlCreatePoll = @"INSERT INTO poll (username, book_id_for_favorite_title, book_id_for_favorite_authors, week_of) VALUES (@username, @favoriteBook, @favoriteAuthors, @weekOf);";
+
+
 
         public PollSqlDAO(string connectionString)
         {
@@ -88,7 +95,7 @@ namespace c_final_capstone_v2.DAL
                         PollResultsModel pollResult = new PollResultsModel();
 
                         //pollResult.Username = Convert.ToString(reader["username"]);
-                        pollResult.FavoriteBook = Convert.ToString(reader["favorite_books"]);
+                        pollResult.FavoriteBook = Convert.ToString(reader["favorite_book"]);
                         pollResult.FavoriteAuthors = Convert.ToString(reader["favorite_authors"]);
                         pollResult.WeekOf = (Convert.ToDateTime(reader["week_of"])).ToString("d");
 

@@ -8,10 +8,10 @@ namespace c_final_capstone_v2.Models
 {
     public class LoginUser
     {
-        [Required]
+        [Required(ErrorMessage = "Username is required")]
         public string Username { get; set; } 
         
-        [Required]
+        [Required(ErrorMessage = "Password is required")]
         public string Password { get; set; }
 
         public bool IsAdmin { get; set; }
