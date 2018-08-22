@@ -14,12 +14,12 @@
 @using (Html.BeginForm("SearchResults", "Home", FormMethod.Post))
 {
     <div class="formValidationGroup form-group">
-
         @Html.TextBoxFor(m => m.TitleSearchInput, new { placeholder = "Title", @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.TitleSearchInput, "", new { @class = "text-danger" })
     </div>
     <div class="formValidationGroup form-group">
-
         @Html.TextBoxFor(m => m.AuthorSearchInput, new { placeholder = "Author", @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.AuthorSearchInput, "", new { @class = "text-danger" })
     </div>
     <div class="formValidationGroup form-group">
         @Html.DropDownListFor(m => m.GenreSearchInput, genreList, new { placeholder = "Genre", @class = "form-control" })
