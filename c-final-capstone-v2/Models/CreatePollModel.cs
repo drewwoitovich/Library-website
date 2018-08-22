@@ -26,7 +26,7 @@ namespace c_final_capstone_v2.Models
         public string FavoriteBook { get; set; }
 
         [Required]
-        [Display(Name = "Favorite Authors")]
+        [Display(Name = "Favorite Author(s)")]
         public string FavoriteAuthors { get; set; }
     }
 }

@@ -1,6 +1,60 @@
-Add User:
-	username: User
-	password: password
-	is_admin: false
-	newsletter: 
-	email: user@email.com
+DEMO
+1) State the project objective:
+	Create a web application where book enthusiasts can come to discover what the next great read is. 
+	Users can search for new and old book titles. 
+	A newsletter helps users stay informed when new releases are announced.
+	And an online forum engages users in discussion with each other.
+	Users can vote for their favorite books and authors.
+
+2) Identify the users
+	- Anonymous users
+	- Registered users
+	- Admin users
+
+3) Illustrate a user story through the demo
+
+4) Detail additional features beyond requirements
+
+
+Not Logged In:
+	- Can Search
+		- title: 
+		  author: 
+		  genre: 
+		  new books: 
+	- Cannot add to reading list
+	- Can view, but not Post to Forum
+	- Cannot view or Post to Weekly Poll
+	- Register as New User
+		- username: User
+		  password: password
+		  email: user@email.com
+		  newsletter: false
+	- Logout
+	
+Logged in as Regular User:
+	- Login
+	- Search
+		- title: 
+		  author: 
+		  genre: 
+		  new books: 
+	- Add to reading list
+	- Mark as read
+	- Delete from read books
+	- Logout
+
+Logged in as Admin:
+	- Login
+	- Add a book
+		- title: Demo Book
+		  author: Demo Author
+		  genre: Demo
+		  shelf: 1
+	- Search for added book
+		- title: Demo Book
+	- Add Poll vote
+		- book: 20 Years After (57)
+		  author: Afton Nelsen (484)
+	- Add Forum post
+		- message: Sed semper justo hendrerit mi rhoncus, in fringilla urna tristique.

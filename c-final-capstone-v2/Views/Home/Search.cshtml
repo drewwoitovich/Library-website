@@ -1,6 +1,8 @@
 ﻿@model c_final_capstone_v2.Models.Search
 
 @{
+    ViewBag.Title = "Search";
+
     List<SelectListItem> genreList = new List<SelectListItem>();
     genreList.Add(new SelectListItem { Text = "Select a Genre", Value = "" });
     foreach (string genre in ViewBag.Genres)

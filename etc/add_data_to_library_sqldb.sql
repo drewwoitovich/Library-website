@@ -1,61 +1,25 @@
-DROP TABLE poll;
-DROP TABLE reading_list;
-DROP TABLE book;
-DROP TABLE forum;
-DROP TABLE [user];
+--Add Data To Library Database
 
-CREATE TABLE [user] (
-  username varchar(32) NOT NULL,
-  password nvarchar(32) NOT NULL,
-  is_admin bit NOT NULL,
-  newsletter bit,
-  email nvarchar(max),
-  CONSTRAINT pk_user_username PRIMARY KEY (username)
-);
+USE library;
 
-CREATE TABLE forum (
-  post_id integer identity NOT NULL,
-  username varchar(32) NOT NULL,
-  message varchar(max) NOT NULL,
-  CONSTRAINT fk_forum_username FOREIGN KEY (username) REFERENCES [user](username),
-  CONSTRAINT pk_forum_post_id PRIMARY KEY (post_id)
-  );
+DELETE FROM poll;
+DELETE FROM reading_list;
+DELETE FROM book;
+DELETE FROM forum;
+DELETE FROM [user];
 
-CREATE TABLE book (
-  book_id integer identity NOT NULL,
-  authors varchar(max) NOT NULL,
-  title varchar(max) NOT NULL,
-  genre varchar(max) NOT NULL,
-  shelf_number integer NOT NULL,
-  add_date datetime NOT NULL,
-  CONSTRAINT pk_book_book_id PRIMARY KEY (book_id)
-  );
-
-CREATE TABLE reading_list (
-  username varchar(32) NOT NULL,
-  book_id integer NOT NULL,
-  read_status bit,
-  CONSTRAINT fk_reading_list_username FOREIGN KEY (username) REFERENCES [user](username),
-  CONSTRAINT fk_reading_list_book_id FOREIGN KEY (book_id) REFERENCES book(book_id),
-  CONSTRAINT pk_reading_list_username_book_id PRIMARY KEY (username, book_id)
-);
-
-CREATE TABLE poll (
-  poll_id integer identity NOT NULL,
-  username varchar(32) NOT NULL,
-  book_id_for_favorite_title integer,
-  book_id_for_favorite_authors integer,
-  week_of date NOT NULL,
-  CONSTRAINT fk_poll_book_id_for_favorite_title FOREIGN KEY (book_id_for_favorite_title) REFERENCES book(book_id),
-  CONSTRAINT fk_poll_book_id_for_favorite_authors FOREIGN KEY (book_id_for_favorite_authors) REFERENCES book(book_id),
-  CONSTRAINT fk_poll_username FOREIGN KEY (username) REFERENCES [user](username),
-  CONSTRAINT pk_poll_poll_id PRIMARY KEY (poll_id)
-);
-
+INSERT INTO [user] (username, password, is_admin, newsletter, email) VALUES ('drew', 'password1', 1, 1, 'drew@email.com');
+INSERT INTO [user] (username, password, is_admin, newsletter, email) VALUES ('bradon', 'password2', 1, 1, 'bradon@email.com');
+INSERT INTO [user] (username, password, is_admin, newsletter, email) VALUES ('alyson', 'password3', 1, 1, 'alyson@email.com');
 INSERT INTO [user] (username, password, is_admin, newsletter, email) VALUES ('AdminUser', 'adminpassword', 1, 1, 'admin@email.com');
 
 SET IDENTITY_INSERT forum ON;
-INSERT INTO forum (post_id, username, message) VALUES (1,'drew','Hello World!');
+INSERT INTO forum (post_id, username, message) VALUES (1,'drew','Pellentesque quis elit odio. Quisque ac sodales magna, mollis pulvinar orci. Morbi vitae dignissim nisi. Pellentesque ut mi nec ante egestas pulvinar. Morbi ac congue massa, non iaculis felis. Phasellus egestas fermentum diam et viverra. Pellentesque imperdiet rhoncus nisl, at pellentesque lectus interdum nec. Vivamus viverra ut ex et ullamcorper.');
+INSERT INTO forum (post_id, username, message) VALUES (2,'bradon','Vestibulum facilisis volutpat justo, ac semper enim tempus at. Curabitur suscipit arcu justo, quis sollicitudin urna accumsan et. Quisque nisl odio, accumsan sed elementum vitae, lobortis nec odio.');
+INSERT INTO forum (post_id, username, message) VALUES (3,'alyson','Nunc a sem blandit, consectetur justo at, iaculis elit.');
+INSERT INTO forum (post_id, username, message) VALUES (4,'AdminUser','Cras nec justo vitae risus pretium faucibus. Sed condimentum sem massa, et placerat elit egestas sed. Donec pretium gravida elit in facilisis. Nullam elementum eu ante nec tempor. Aliquam at rhoncus arcu. Suspendisse massa neque, egestas ut rutrum ut, egestas nec felis. Nam rutrum ante leo, at semper dolor feugiat in.');
+INSERT INTO forum (post_id, username, message) VALUES (5,'drew','Praesent eu vulputate nisi. Suspendisse aliquet consequat metus, a ultricies augue pharetra ac.');
+INSERT INTO forum (post_id, username, message) VALUES (6,'bradon','Aenean eu nulla posuere, sagittis sem blandit, suscipit ante. Curabitur nec sapien est. Suspendisse potenti. Sed consequat pulvinar dolor. Mauris ante ipsum, aliquet ac dui non, ultrices ullamcorper massa.');
 SET IDENTITY_INSERT forum OFF;
 
 SET IDENTITY_INSERT book ON;
@@ -728,7 +692,7 @@ insert into book (book_id, title, authors, genre, add_date, shelf_number) values
 insert into book (book_id, title, authors, genre, add_date, shelf_number) values (667, 'Universal Soldier: Regeneration', 'Camila Volker', 'Action', '2018-04-03', 1);
 insert into book (book_id, title, authors, genre, add_date, shelf_number) values (668, 'Belly', 'Dena Ferdinand', 'Crime', '2017-01-27', 8);
 insert into book (book_id, title, authors, genre, add_date, shelf_number) values (669, '1492: Conquest of Paradise', 'Rourke Ruben', 'Adventure', '2016-11-18', 3);
-insert into book (book_id, title, authors, genre, add_date, shelf_number) values (670, '*batteries not included', 'Coop Usmar', 'Children', '2017-07-17', 6);
+insert into book (book_id, title, authors, genre, add_date, shelf_number) values (670, 'Batteries Not Included', 'Coop Usmar', 'Children', '2017-07-17', 6);
 insert into book (book_id, title, authors, genre, add_date, shelf_number) values (671, 'Rowing with the Wind (Remando al viento)', 'Franny Morgans', 'Drama', '2018-01-30', 3);
 insert into book (book_id, title, authors, genre, add_date, shelf_number) values (672, 'Strange Color Of Your Body''s Tears, The (L''étrange couleur des larmes de ton corps)', 'Karie Barthrop', 'Mystery', '2018-06-20', 2);
 insert into book (book_id, title, authors, genre, add_date, shelf_number) values (673, 'Olympian Holiday (Loma) ', 'Rahel Deackes', 'Comedy', '2018-02-08', 9);
@@ -1059,18 +1023,22 @@ insert into book (book_id, title, authors, genre, add_date, shelf_number) values
 insert into book (book_id, title, authors, genre, add_date, shelf_number) values (998, 'Tokyo!', 'Debbi Bouller', 'Drama', '2016-10-18', 4);
 insert into book (book_id, title, authors, genre, add_date, shelf_number) values (999, 'The Cyclone', 'Robin Braxton', 'Comedy', '2017-02-03', 7);
 insert into book (book_id, title, authors, genre, add_date, shelf_number) values (1000, 'Take Care of My Cat (Goyangileul butaghae)', 'Lizzy Reddoch', 'Drama', '2017-10-10', 9);
-
 SET IDENTITY_INSERT book OFF;
 
-INSERT INTO reading_list (username, book_id, read_status) VALUES ('drew', 2, 1);
-INSERT INTO reading_list (username, book_id, read_status) VALUES ('drew', 3, 0);
-INSERT INTO reading_list (username, book_id, read_status) VALUES ('bradon', 1, 0);
+INSERT INTO reading_list (username, book_id, read_status) VALUES ('drew', 897, 0);
+INSERT INTO reading_list (username, book_id, read_status) VALUES ('drew', 994, 0);
+INSERT INTO reading_list (username, book_id, read_status) VALUES ('drew', 428, 0);
+INSERT INTO reading_list (username, book_id, read_status) VALUES ('drew', 874, 1);
+INSERT INTO reading_list (username, book_id, read_status) VALUES ('drew', 55, 1);
+INSERT INTO reading_list (username, book_id, read_status) VALUES ('bradon', 760, 0);
+INSERT INTO reading_list (username, book_id, read_status) VALUES ('bradon', 997, 1);
+INSERT INTO reading_list (username, book_id, read_status) VALUES ('bradon', 267, 1);
+INSERT INTO reading_list (username, book_id, read_status) VALUES ('bradon', 543, 1);
+INSERT INTO reading_list (username, book_id, read_status) VALUES ('alyson', 45, 0);
+INSERT INTO reading_list (username, book_id, read_status) VALUES ('alyson', 888, 0);
+INSERT INTO reading_list (username, book_id, read_status) VALUES ('alyson', 307, 1);
 
 SET IDENTITY_INSERT poll ON;
-INSERT INTO poll (poll_id, username, book_id_for_favorite_title, book_id_for_favorite_authors, week_of) VALUES (1, 'alyson', 1, 1, '2018-08-13');
-INSERT INTO poll (poll_id, username, book_id_for_favorite_title, book_id_for_favorite_authors, week_of) VALUES (2, 'drew', 2, 1, '2018-08-13');
-INSERT INTO poll (poll_id, username, book_id_for_favorite_title, book_id_for_favorite_authors, week_of) VALUES (3, 'bradon', 3, 2, '2018-08-13');
-INSERT INTO poll (poll_id, username, book_id_for_favorite_title, book_id_for_favorite_authors, week_of) VALUES (4, 'drew', 1, 2, '2018-08-20');
-INSERT INTO poll (poll_id, username, book_id_for_favorite_title, book_id_for_favorite_authors, week_of) VALUES (5, 'bradon', 2, 3, '2018-08-20');
-INSERT INTO poll (poll_id, username, book_id_for_favorite_title, book_id_for_favorite_authors, week_of) VALUES (6, 'alyson', 3, 3, '2018-08-20');
+INSERT INTO poll (poll_id, username, book_id_for_favorite_title, book_id_for_favorite_authors, week_of) VALUES (1, 'drew', 544, 484, '2018-08-20');
+INSERT INTO poll (poll_id, username, book_id_for_favorite_title, book_id_for_favorite_authors, week_of) VALUES (2, 'bradon', 57, 497, '2018-08-20');
 SET IDENTITY_INSERT poll OFF;

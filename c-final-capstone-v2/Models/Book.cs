@@ -14,6 +14,7 @@ namespace c_final_capstone_v2.Models
         public string Title { get; set; }
 
         [Required]
+        [Display(Name = "Author(s)")]
         public string Author { get; set; }
 
         [Required]

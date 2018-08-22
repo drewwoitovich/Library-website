@@ -13,7 +13,7 @@ namespace c_final_capstone_v2.Models
         [Display(Name = "Top Voted Book")]
         public string FavoriteBook { get; set; }
 
-        [Display(Name = "Top Voted Authors")]
+        [Display(Name = "Top Voted Author(s)")]
         public string FavoriteAuthors { get; set; }
 
         [Display(Name = "Week Of")]

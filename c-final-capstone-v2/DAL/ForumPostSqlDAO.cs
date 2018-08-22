@@ -9,10 +9,9 @@ namespace c_final_capstone_v2.DAL
 {
     public class ForumPostSqlDAO : IForumPostSqlDAO
     {
-        private static string sqlGetAllForumPosts = "SELECT [username], [message] FROM forum";
+        private static string sqlGetAllForumPosts = @"SELECT [username], [message] FROM forum ORDER BY post_id DESC;";
 
-        private static string sqlCreateForumPost = "INSERT INTO[dbo].[forum] ([username] " +
-          " ,[message]) VALUES (@username, @message)";
+        private static string sqlCreateForumPost = @"INSERT INTO[dbo].[forum] ([username], [message]) VALUES (@username, @message);";
 
         private string connectionString;
 

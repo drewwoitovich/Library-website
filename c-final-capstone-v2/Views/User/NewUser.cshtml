@@ -1,5 +1,10 @@
 ﻿@model c_final_capstone_v2.Models.RegisterUser
-<div >
+
+@{
+    ViewBag.Title = "Register New User";
+}
+
+<div>
     @using (Html.BeginForm("NewUser", "User", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
