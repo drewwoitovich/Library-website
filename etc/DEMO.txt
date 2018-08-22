@@ -1,0 +1,6 @@
+Add User:
+	username: User
+	password: password
+	is_admin: false
+	newsletter: 
+	email: user@email.com
