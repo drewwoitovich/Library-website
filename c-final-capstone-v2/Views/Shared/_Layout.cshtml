@@ -3,12 +3,17 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!--Typefaces-->
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans:700|Playfair+Display" rel="stylesheet">
+    
     <title>@ViewBag.Title - Book Library</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" type="text/css" href="~/Content/style.css" />
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-light navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -33,16 +38,20 @@
                     else
                     {
                         <li>@Html.ActionLink("Login", "Login", "User")</li>
+                        <li>@Html.ActionLink("Sign Up", "NewUser", "User")</li>
                     }
                 </ul>
             </div>
         </div>
     </div>
     <div class="container body-content">
-        @RenderBody()
-        <hr />
+        <div class="page-content">
+            @RenderBody()
+        </div>
         <footer>
-            <p>&copy; @DateTime.Now.Year - ABD Application</p>
+            <div class="tha-footer">
+                <p>&copy; @DateTime.Now.Year - ABD Application</p>
+            </div>
         </footer>
     </div>
 
