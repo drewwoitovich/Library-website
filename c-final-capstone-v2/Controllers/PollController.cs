@@ -24,6 +24,8 @@ namespace c_final_capstone_v2.Controllers
             var pollView = new PollViewModel();
             pollView.CreatePoll = new CreatePollModel();
             pollView.PollResults = pollDAO.GetPollResults();
+            ViewBag.BookTitles = pollDAO.ListAllBooks();
+            ViewBag.Authors = pollDAO.ListAllAuthors();
 
             if (base.IsAuthenticated)
             {

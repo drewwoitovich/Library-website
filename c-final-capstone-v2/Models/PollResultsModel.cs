@@ -17,6 +17,6 @@ namespace c_final_capstone_v2.Models
         public string FavoriteAuthors { get; set; }
 
         [Display(Name = "Week Of")]
-        public DateTime WeekOf { get; set; }
+        public string WeekOf { get; set; }
     }
 }

@@ -90,7 +90,7 @@ namespace c_final_capstone_v2.DAL
                         //pollResult.Username = Convert.ToString(reader["username"]);
                         pollResult.FavoriteBook = Convert.ToString(reader["favorite_books"]);
                         pollResult.FavoriteAuthors = Convert.ToString(reader["favorite_authors"]);
-                        pollResult.WeekOf = Convert.ToDateTime(reader["week_of"]);
+                        pollResult.WeekOf = (Convert.ToDateTime(reader["week_of"])).ToString("d");
 
                         allPolls.Add(pollResult);
                     }

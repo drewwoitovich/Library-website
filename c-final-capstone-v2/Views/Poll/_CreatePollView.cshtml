@@ -2,6 +2,22 @@
 
 @{
     ViewBag.Title = "Weekly Poll";
+
+    List<SelectListItem> bookList = new List<SelectListItem>();
+    bookList.Add(new SelectListItem { Text = "Select Your Favorite Book", Value = "" });
+    foreach (KeyValuePair<string, int> bookKVP in ViewBag.BookTitles)
+    {
+        SelectListItem thisBook = new SelectListItem { Text = bookKVP.Key, Value = bookKVP.Value.ToString() };
+        bookList.Add(thisBook);
+    }
+
+    List<SelectListItem> authorsList = new List<SelectListItem>();
+    authorsList.Add(new SelectListItem { Text = "Select Your Favorite Author(s)", Value = "" });
+    foreach (KeyValuePair<string, int> authorsKVP in ViewBag.Authors)
+    {
+        SelectListItem thisBook = new SelectListItem { Text = authorsKVP.Key, Value = authorsKVP.Value.ToString() };
+        authorsList.Add(thisBook);
+    }
 }
 
 <h2>Complete Weekly Poll</h2>
@@ -15,7 +31,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.FavoriteBook, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FavoriteBook, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(m => m.FavoriteBook, bookList, new { placeholder = "Favorite Book", @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.FavoriteBook, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -23,7 +39,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.FavoriteAuthors, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FavoriteAuthors, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(m => m.FavoriteAuthors, authorsList, new { placeholder = "Favorite Author(s)", @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.FavoriteAuthors, "", new { @class = "text-danger" })
             </div>
         </div>

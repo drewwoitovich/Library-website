@@ -1,6 +1,9 @@
 ﻿@model c_final_capstone_v2.Models.PollViewModel
 
+@{ViewBag.Title = "Poll";}
+
 @Html.Partial("_CreatePollView", Model.CreatePoll)
+<br />
 @Html.Partial("_PollResultsView", Model.PollResults)
 
 @section Scripts {
