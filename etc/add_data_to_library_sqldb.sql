@@ -1,16 +1,15 @@
 --Add Data To Library Database
+--USE library;
 
-USE library;
-
-DELETE FROM poll;
-DELETE FROM reading_list;
-DELETE FROM book;
-DELETE FROM forum;
-DELETE FROM [user];
+--DELETE FROM poll;
+--DELETE FROM reading_list;
+--DELETE FROM book;
+--DELETE FROM forum;
+--DELETE FROM [user];
 
 INSERT INTO [user] (username, password, is_admin, newsletter, email) VALUES ('drew', 'password1', 1, 1, 'drew@email.com');
 INSERT INTO [user] (username, password, is_admin, newsletter, email) VALUES ('bradon', 'password2', 1, 1, 'bradon@email.com');
-INSERT INTO [user] (username, password, is_admin, newsletter, email) VALUES ('alyson', 'password3', 1, 1, 'alyson@email.com');
+INSERT INTO [user] (username, password, is_admin, newsletter, email) VALUES ('alyson', 'password3', 0, 0, 'alyson@email.com');
 INSERT INTO [user] (username, password, is_admin, newsletter, email) VALUES ('AdminUser', 'adminpassword', 1, 1, 'admin@email.com');
 
 SET IDENTITY_INSERT forum ON;
@@ -1025,15 +1024,15 @@ insert into book (book_id, title, authors, genre, add_date, shelf_number) values
 insert into book (book_id, title, authors, genre, add_date, shelf_number) values (1000, 'Take Care of My Cat (Goyangileul butaghae)', 'Lizzy Reddoch', 'Drama', '2017-10-10', 9);
 SET IDENTITY_INSERT book OFF;
 
-INSERT INTO reading_list (username, book_id, read_status) VALUES ('drew', 897, 0);
-INSERT INTO reading_list (username, book_id, read_status) VALUES ('drew', 994, 0);
-INSERT INTO reading_list (username, book_id, read_status) VALUES ('drew', 428, 0);
-INSERT INTO reading_list (username, book_id, read_status) VALUES ('drew', 874, 1);
-INSERT INTO reading_list (username, book_id, read_status) VALUES ('drew', 55, 1);
-INSERT INTO reading_list (username, book_id, read_status) VALUES ('bradon', 760, 0);
-INSERT INTO reading_list (username, book_id, read_status) VALUES ('bradon', 997, 1);
-INSERT INTO reading_list (username, book_id, read_status) VALUES ('bradon', 267, 1);
-INSERT INTO reading_list (username, book_id, read_status) VALUES ('bradon', 543, 1);
+INSERT INTO reading_list (username, book_id, read_status) VALUES ('alyson', 897, 0);
+INSERT INTO reading_list (username, book_id, read_status) VALUES ('alyson', 994, 0);
+INSERT INTO reading_list (username, book_id, read_status) VALUES ('alyson', 428, 0);
+INSERT INTO reading_list (username, book_id, read_status) VALUES ('alyson', 874, 1);
+INSERT INTO reading_list (username, book_id, read_status) VALUES ('alyson', 55, 1);
+INSERT INTO reading_list (username, book_id, read_status) VALUES ('alyson', 760, 0);
+INSERT INTO reading_list (username, book_id, read_status) VALUES ('alyson', 997, 1);
+INSERT INTO reading_list (username, book_id, read_status) VALUES ('alyson', 267, 1);
+INSERT INTO reading_list (username, book_id, read_status) VALUES ('alyson', 543, 1);
 INSERT INTO reading_list (username, book_id, read_status) VALUES ('alyson', 45, 0);
 INSERT INTO reading_list (username, book_id, read_status) VALUES ('alyson', 888, 0);
 INSERT INTO reading_list (username, book_id, read_status) VALUES ('alyson', 307, 1);
